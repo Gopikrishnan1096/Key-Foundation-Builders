@@ -20,8 +20,15 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const isHome = pathname === "/";
+  /** Solid bar: inner pages, scrolled home, or mobile menu open */
+  const useSolidBar = !isHome || scrolled || open;
+  /** Logo + chrome tuned for sitting on dark hero */
+  const logoOnDark = isHome && !useSolidBar;
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -39,14 +46,14 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-200 ${
-        scrolled
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+        useSolidBar
           ? "border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md"
-          : "border-transparent bg-white/80 backdrop-blur-sm"
+          : "border-transparent bg-gradient-to-b from-primary/45 via-primary/15 to-transparent shadow-none backdrop-blur-[2px]"
       }`}
     >
       <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6 lg:px-8">
-        <Logo variant="header" />
+        <Logo variant="header" onDarkBackground={logoOnDark} />
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
           {nav.map((item) => {
@@ -55,8 +62,10 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-accent ${
-                  active ? "text-accent" : "text-slate-600"
+                className={`text-sm font-medium transition-colors ${
+                  useSolidBar
+                    ? `${active ? "text-accent" : "text-slate-600"} hover:text-accent`
+                    : `${active ? "text-accent" : "text-white/95"} drop-shadow-sm hover:text-accent`
                 }`}
               >
                 {item.label}
@@ -76,7 +85,9 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-primary md:hidden"
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-lg md:hidden ${
+            useSolidBar ? "text-primary" : "text-white drop-shadow-md"
+          }`}
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}

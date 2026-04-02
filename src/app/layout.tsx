@@ -36,7 +36,9 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
-        <main id="main-content">{children}</main>
+        <main id="main-content" className="pt-[4.5rem] sm:pt-20">
+          {children}
+        </main>
         <Footer />
         <MobileStickyBar />
         <WhatsAppFab />
