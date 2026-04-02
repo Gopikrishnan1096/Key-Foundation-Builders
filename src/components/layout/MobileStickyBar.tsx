@@ -1,0 +1,41 @@
+"use client";
+
+import Link from "next/link";
+import { MessageCircle, Phone, FileText } from "lucide-react";
+import { site } from "@/lib/site";
+
+export function MobileStickyBar() {
+  const wa = `https://wa.me/${site.whatsappRaw}?text=${encodeURIComponent(
+    `Hi ${site.name}, I'd like a quote.`,
+  )}`;
+
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(15,23,42,0.08)] md:hidden">
+      <div className="mx-auto flex max-w-lg items-stretch justify-between gap-1 px-2 py-2">
+        <a
+          href={`tel:${site.phoneRaw}`}
+          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
+        >
+          <Phone className="h-5 w-5 text-accent" aria-hidden />
+          <span className="text-xs font-semibold">Call</span>
+        </a>
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
+        >
+          <MessageCircle className="h-5 w-5 text-green-600" aria-hidden />
+          <span className="text-xs font-semibold">WhatsApp</span>
+        </a>
+        <Link
+          href="/contact"
+          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
+        >
+          <FileText className="h-5 w-5 text-accent" aria-hidden />
+          <span className="text-xs font-semibold">Get Quote</span>
+        </Link>
+      </div>
+    </div>
+  );
+}
