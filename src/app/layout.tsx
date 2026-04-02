@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
+import { Main } from "@/components/layout/Main";
 import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
@@ -40,9 +41,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
-        <main id="main-content" className="pt-[4.5rem] sm:pt-20">
-          {children}
-        </main>
+        <Main>{children}</Main>
         <Footer />
         <MobileStickyBar />
         <WhatsAppFab />

@@ -7,7 +7,7 @@ const heroImage =
 
 export function Hero() {
   return (
-    <section className="relative -mt-[4.5rem] min-h-[85vh] pt-[4.5rem] sm:-mt-20 sm:pt-20 md:min-h-[90vh]">
+    <section className="relative -mt-[5.75rem] min-h-[85vh] pt-[5.75rem] sm:-mt-[6.25rem] sm:pt-[6.25rem] md:min-h-[90vh]">
       <Image
         src={heroImage}
         alt="Construction site and building framework in Kerala"

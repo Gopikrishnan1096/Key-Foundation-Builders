@@ -52,8 +52,18 @@ export function Header() {
           : "border-transparent bg-gradient-to-b from-primary/45 via-primary/15 to-transparent shadow-none backdrop-blur-[2px]"
       }`}
     >
-      <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6 lg:px-8">
-        <Logo variant="header" onDarkBackground={logoOnDark} />
+      <div
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 ${
+          isHome
+            ? "min-h-[5.75rem] py-2 sm:min-h-[6.25rem]"
+            : "h-[4.5rem] sm:h-20"
+        }`}
+      >
+        <Logo
+          variant="header"
+          onDarkBackground={logoOnDark}
+          isHome={isHome}
+        />
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
           {nav.map((item) => {
@@ -99,7 +109,9 @@ export function Header() {
 
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 top-[4.5rem] bottom-0 z-40 bg-white transition sm:top-20 md:hidden ${
+        className={`fixed inset-x-0 bottom-0 z-40 bg-white transition md:hidden ${
+          isHome ? "top-[5.75rem] sm:top-[6.25rem]" : "top-[4.5rem] sm:top-20"
+        } ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
