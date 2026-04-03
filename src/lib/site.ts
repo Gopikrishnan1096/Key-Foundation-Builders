@@ -1,10 +1,10 @@
 export const site = {
   name: "Key Foundation Builders",
   tagline: "Trusted Construction Experts in Kerala",
-  phone: "+91 98765 43210",
-  phoneRaw: "919876543210",
-  whatsapp: "+91 98765 43210",
-  whatsappRaw: "919876543210",
+  phone: "+91 95266 82306",
+  phoneRaw: "919526682306",
+  whatsapp: "+91 95266 82306",
+  whatsappRaw: "919526682306",
   email: "hello@keyfoundation.in",
   address: {
     line1: "Building No. 12, Industrial Estate Road",
