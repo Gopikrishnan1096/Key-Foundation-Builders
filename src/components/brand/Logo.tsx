@@ -42,7 +42,7 @@ export function Logo({
 
   const img = (
     <Image
-      src="/logo.png"
+      src="/Logo.png"
       alt="Key Foundation Builders"
       width={imgSize[variant].width}
       height={imgSize[variant].height}
