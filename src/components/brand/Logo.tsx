@@ -25,9 +25,9 @@ export function Logo({
 }: Props) {
   const isHeader = variant === "header";
 
-  /** No white pill — halo keeps the mark readable on dark hero */
+  /** Strong white hale so black logos are visible on dark hero */
   const darkHeroFilter =
-    "[filter:drop-shadow(0_2px_8px_rgba(0,0,0,0.75))_drop-shadow(0_0_12px_rgba(255,255,255,0.2))]";
+    "[filter:drop-shadow(0_2px_8px_rgba(0,0,0,0.8))_drop-shadow(0_0_15px_rgba(255,255,255,0.6))] bg-white/10 rounded-xl p-1";
 
   const headerImgClass =
     isHome && isHeader
@@ -42,7 +42,7 @@ export function Logo({
 
   const img = (
     <Image
-      src="/Logo.png"
+      src="/logo.png"
       alt="Key Foundation Builders"
       width={imgSize[variant].width}
       height={imgSize[variant].height}
