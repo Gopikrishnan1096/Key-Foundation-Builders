@@ -12,8 +12,8 @@ type Props = {
 };
 
 const imgSize = {
-  header: { width: 640, height: 280 },
-  footer: { width: 560, height: 240 },
+  header: { width: 1024, height: 1024 },
+  footer: { width: 1024, height: 1024 },
 } as const;
 
 export function Logo({
@@ -31,11 +31,11 @@ export function Logo({
 
   const headerImgClass =
     isHome && isHeader
-      ? `h-14 w-auto max-w-[18rem] object-contain object-left sm:h-[4.25rem] sm:max-w-[22rem] md:h-[4.75rem] md:max-w-[26rem] ${
+      ? `h-20 w-auto max-w-[10rem] object-contain object-left sm:h-[5.5rem] sm:max-w-[12rem] md:h-[6rem] md:max-w-[14rem] ${
           onDarkBackground ? darkHeroFilter : ""
         }`
       : isHeader
-        ? `h-11 w-auto max-w-[13rem] object-contain object-left sm:h-12 sm:max-w-[16rem] md:h-14 md:max-w-[17rem] ${
+        ? `h-14 w-auto max-w-[8rem] object-contain object-left sm:h-16 sm:max-w-[10rem] md:h-16 md:max-w-[12rem] ${
             onDarkBackground ? darkHeroFilter : ""
           }`
         : "";
@@ -56,7 +56,7 @@ export function Logo({
       className={
         isHeader
           ? `${headerImgClass} ${className}`
-          : `h-12 w-auto max-w-[17rem] object-contain object-left sm:h-14 sm:max-w-[19rem] ${className}`
+          : `h-24 w-auto max-w-[12rem] object-contain object-left sm:h-32 sm:max-w-[16rem] ${className}`
       }
       priority={isHeader}
     />
