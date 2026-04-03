@@ -21,10 +21,6 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   const isHome = pathname === "/";
-  /** Solid bar: inner pages, scrolled home, or mobile menu open */
-  const useSolidBar = !isHome || scrolled || open;
-  /** Logo + chrome tuned for sitting on dark hero */
-  const logoOnDark = isHome && !useSolidBar;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -45,13 +41,7 @@ export function Header() {
   }, [open]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-        useSolidBar
-          ? "border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md"
-          : "border-transparent bg-gradient-to-b from-primary/45 via-primary/15 to-transparent shadow-none backdrop-blur-[2px]"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md transition-colors duration-300">
       <div
         className={`mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 ${
           isHome
@@ -61,7 +51,7 @@ export function Header() {
       >
         <Logo
           variant="header"
-          onDarkBackground={logoOnDark}
+          onDarkBackground={false}
           isHome={isHome}
         />
 
@@ -73,10 +63,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={`text-sm font-medium transition-colors ${
-                  useSolidBar
-                    ? `${active ? "text-accent" : "text-slate-600"} hover:text-accent`
-                    : `${active ? "text-accent" : "text-white/95"} drop-shadow-sm hover:text-accent`
-                }`}
+                  active ? "text-accent" : "text-slate-600"
+                } hover:text-accent`}
               >
                 {item.label}
               </Link>
@@ -95,10 +83,8 @@ export function Header() {
 
         <button
           type="button"
-          className={`inline-flex h-10 w-10 items-center justify-center rounded-lg md:hidden ${
-            useSolidBar ? "text-primary" : "text-white drop-shadow-md"
-          }`}
-          aria-expanded={open}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-primary md:hidden"
+          aria-expanded={open ? "true" : "false"}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
