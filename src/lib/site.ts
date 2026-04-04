@@ -7,10 +7,10 @@ export const site = {
   whatsappRaw: "919526682306",
   email: "hello@keyfoundation.in",
   address: {
-    line1: "Building No. 12, Industrial Estate Road",
-    city: "Kochi",
+    line1: "Building No./Flat No. 14/108D, NSS Karayogam No.3095, Parppacode",
+    city: "Edakkattuvayal",
     state: "Kerala",
-    pin: "682030",
+    pin: "682315",
     country: "India",
   },
   social: {
