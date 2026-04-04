@@ -13,6 +13,9 @@ export const site = {
     pin: "682315",
     country: "India",
   },
+  mapsUrl: "https://maps.app.goo.gl/mWky1chFCnjeQgTa6",
+  mapsEmbed:
+    "https://maps.google.com/maps?q=9.863936,76.418773&z=17&output=embed",
   social: {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
@@ -25,8 +28,7 @@ export function fullAddress(): string {
   return `${line1}, ${city}, ${state} ${pin}`;
 }
 
-/** URL-encoded query for Google Maps embed (no API key). */
+/** Google Maps embed src — uses the exact pinned coordinates. */
 export function mapsEmbedSrc(): string {
-  const q = encodeURIComponent(fullAddress());
-  return `https://www.google.com/maps?q=${q}&output=embed`;
+  return site.mapsEmbed;
 }
