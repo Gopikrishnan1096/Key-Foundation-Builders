@@ -32,34 +32,6 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "commercial-hub-thrissur",
-    name: "Commercial Hub Thrissur",
-    category: "commercial",
-    location: "Thrissur, Kerala",
-    sqft: 12000,
-    year: 2023,
-    duration: "22 months",
-    summary: "Multi-tenant commercial block with optimized floor plates.",
-    description: [
-      "Ground-up construction including basement parking, retail frontage, and office floors.",
-      "We delivered on an aggressive timeline with weekly progress reviews and transparent billing milestones.",
-    ],
-    gallery: [
-      u("photo-1449824913935-59a10b8d2000"),
-      u("photo-1545324418-cc1a3fa10c00"),
-      u("photo-1497366216548-37526070297c"),
-      u("photo-1467269204964-06e137fb2a00"),
-    ],
-    beforeAfter: [
-      {
-        label: "Street-facing facade",
-        before: u("photo-1541888946425-d81bb19240f5"),
-        after: u("photo-1449824913935-59a10b8d2000"),
-      },
-    ],
-    featured: true,
-  },
-  {
     slug: "logistics-warehouse-calicut",
     name: "Logistics Warehouse Calicut",
     category: "warehouses",
