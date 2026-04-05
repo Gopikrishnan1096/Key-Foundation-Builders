@@ -1,12 +1,38 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Clock, CreditCard, Package, MapPin, BadgeCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const points = [
-  "Quality Materials",
-  "On-Time Delivery",
-  "Experienced Team",
-  "Transparent Pricing",
+const features = [
+  {
+    icon: BadgeCheck,
+    title: "10+ Years of Excellence",
+    desc: "A decade of construction expertise building homes and commercial projects across Kerala.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "50+ Projects Completed",
+    desc: "From compact homes to 7,000 sqft warehouses — a proven track record you can trust.",
+  },
+  {
+    icon: CreditCard,
+    title: "Transparent Pricing",
+    desc: "No hidden costs. Detailed BOQ before work starts so you know exactly what you're paying for.",
+  },
+  {
+    icon: Package,
+    title: "ISI-Certified Materials",
+    desc: "We source only quality, ISI-certified building materials for strength and durability.",
+  },
+  {
+    icon: Clock,
+    title: "On-Time Delivery",
+    desc: "Clear timelines and weekly progress updates — your project stays on schedule.",
+  },
+  {
+    icon: MapPin,
+    title: "Serving All of Kerala",
+    desc: "Kochi, Thrissur, Kozhikode, Thiruvananthapuram — we work across every district.",
+  },
 ];
 
 export function WhyChooseUs() {
@@ -18,18 +44,22 @@ export function WhyChooseUs() {
           title="Why Choose Key Foundation Builders"
           subtitle="We combine site discipline with clear communication so your build stays predictable."
         />
-        <ul className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
-          {points.map((text) => (
-            <li
-              key={text}
-              className="flex items-center gap-3 rounded-xl border border-slate-100 bg-white p-4 shadow-sm"
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map(({ icon: Icon, title, desc }) => (
+            <div
+              key={title}
+              className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl"
             >
-              <CheckCircle2 className="h-6 w-6 shrink-0 text-accent" aria-hidden />
-              <span className="font-medium text-primary">{text}</span>
-            </li>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition group-hover:bg-accent/20">
+                <Icon className="h-6 w-6 text-accent" aria-hidden />
+              </div>
+              <h3 className="mt-4 font-bold text-primary">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">{desc}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </Container>
     </section>
   );
 }
+

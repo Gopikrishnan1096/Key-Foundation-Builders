@@ -1,6 +1,8 @@
 export const site = {
   name: "Key Foundation Builders",
   tagline: "Trusted Construction Experts in Kerala",
+  siteUrl: "https://www.keyfoundation.in",
+  founded: 2014,
   phone: "+91 95266 82306",
   phoneRaw: "919526682306",
   whatsapp: "+91 95266 82306",
@@ -21,6 +23,20 @@ export const site = {
     instagram: "https://instagram.com",
     youtube: "https://youtube.com",
   },
+  keywords: [
+    "construction company Kerala",
+    "building contractors Kerala",
+    "construction company Kochi",
+    "house construction Ernakulam",
+    "builders Kochi",
+    "home builders Kerala",
+    "commercial construction Kerala",
+    "warehouse construction Kerala",
+    "best builders in Kerala",
+    "construction company Thrissur",
+    "residential construction Kerala",
+    "Key Foundation Builders",
+  ],
 } as const;
 
 export function fullAddress(): string {

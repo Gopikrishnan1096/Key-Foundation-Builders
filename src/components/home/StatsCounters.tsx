@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Home, Warehouse, MapPin, Award } from "lucide-react";
+import { Home, Building2, MapPin, Award } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
 const items = [
   { icon: Home, value: 100, suffix: "+", label: "Homes Built" },
-  { icon: Warehouse, value: 1, suffix: "", label: "Warehouse (7000 sqft)" },
+  { icon: Building2, value: 50, suffix: "+", label: "Projects Completed" },
+  { icon: Award, value: 10, suffix: "+", label: "Years Experience" },
   {
     icon: MapPin,
     kind: "text" as const,
     main: "Kerala",
-    label: "Serving Across Kerala",
+    label: "Serving Kerala Region",
   },
-  { icon: Award, value: 5, suffix: "+", label: "Years Experience" },
 ];
 
 function useCountUp(target: number, active: boolean, duration = 1400) {
