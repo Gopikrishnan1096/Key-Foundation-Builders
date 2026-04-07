@@ -85,7 +85,7 @@ export function Header() {
         <button
           type="button"
           className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-primary md:hidden"
-          aria-expanded={open ? "true" : "false"}
+          aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
