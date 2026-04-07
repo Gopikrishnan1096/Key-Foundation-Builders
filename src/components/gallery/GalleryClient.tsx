@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
@@ -224,18 +225,18 @@ export function GalleryClient() {
             touch for a free consultation and site visit.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a
+            <Link
               href="/contact"
               className="inline-flex items-center rounded-lg bg-amber-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-amber-500/30 transition hover:bg-amber-400"
             >
               Get a Free Quote
-            </a>
-            <a
+            </Link>
+            <Link
               href="/projects"
               className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-amber-500 hover:text-amber-600"
             >
               View All Projects
-            </a>
+            </Link>
           </div>
         </Container>
       </section>
