@@ -21,7 +21,7 @@ export function Footer() {
             <div>
               <Logo variant="footer" onDarkBackground={false} />
               <p className="text-zinc-600 text-sm leading-relaxed max-w-sm mt-8 italic font-serif">
-                "{site.tagline}"
+                &quot;{site.tagline}&quot;
               </p>
             </div>
             

@@ -29,7 +29,7 @@ export function EstimateCalculator() {
             </h2>
             <p className="text-zinc-500 text-lg mb-12 max-w-xl font-sans">
               An intelligent framework for high-fidelity cost distribution analysis, 
-              tailored for Kerala's premium architectural market.
+              tailored for Kerala&apos;s premium architectural market.
             </p>
             
             <div className="space-y-12 max-w-md">
