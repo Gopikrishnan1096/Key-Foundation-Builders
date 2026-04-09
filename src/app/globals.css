@@ -14,6 +14,14 @@ html {
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }
+
+  ::selection {
+    @apply bg-primary/20 text-zinc-900;
+  }
+
+  :focus-visible {
+    outline: none;
+  }
 }
 
 /* Safe area for mobile sticky bar */
@@ -24,5 +32,33 @@ html {
 @media (min-width: 768px) {
   .pb-mobile-bar {
     padding-bottom: 0;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+  }
+}
+
+@layer utilities {
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 800ms ease-out both;
   }
 }
