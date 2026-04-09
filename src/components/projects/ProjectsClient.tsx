@@ -27,7 +27,7 @@ export function ProjectsClient({ projects }: Props) {
       />
 
       <div
-        className="mb-10 flex flex-wrap justify-center gap-2"
+        className="mb-12 flex flex-wrap justify-center gap-4"
         role="tablist"
         aria-label="Filter projects"
       >
@@ -40,10 +40,10 @@ export function ProjectsClient({ projects }: Props) {
               role="tab"
               aria-selected={active}
               onClick={() => setFilter(c.id)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              className={`rounded-sm px-6 py-2.5 text-xs font-black uppercase tracking-widest transition-all ${
                 active
-                  ? "bg-primary text-white shadow-md"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  ? "bg-primary text-black"
+                  : "bg-white/5 text-gray-500 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               {c.label}

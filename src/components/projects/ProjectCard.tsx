@@ -11,20 +11,24 @@ export function ProjectCard({ project }: Props) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group block overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl"
+      className="group relative overflow-hidden bg-white/5 border border-white/10 rounded-sm aspect-[4/5] flex flex-col justify-end p-8 transition-all hover:bg-white/10 hover:border-primary/50"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate-200">
+      <div className="absolute inset-0 z-0">
         <ImageSrc src={cover} alt={project.name} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
       </div>
-      <div className="p-5">
-        <h3 className="text-lg font-semibold text-primary group-hover:text-accent">
+      
+      <div className="relative z-10 transform transition-transform group-hover:translate-y-[-10px] duration-500">
+        <p className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-2">{project.location}</p>
+        <h3 className="text-2xl font-black text-white uppercase leading-tight">
           {project.name}
         </h3>
-        <p className="mt-1 text-sm text-slate-600">{project.location}</p>
-        <p className="mt-2 text-xs font-medium text-slate-500">
-          {project.sqft.toLocaleString()} sqft · {project.year}
+        <p className="mt-4 text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+          {project.sqft.toLocaleString()} SQFT <span className="h-1 w-1 bg-primary rounded-full"></span> {project.year}
         </p>
       </div>
+
+      <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
     </Link>
   );
 }

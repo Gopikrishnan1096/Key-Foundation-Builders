@@ -11,85 +11,74 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-slate-50">
-      <div className="border-b border-slate-100 bg-white py-12 md:py-16">
+    <div className="bg-black min-h-screen pt-24">
+      <div className="py-20">
         <Container>
-          <p className="text-sm font-semibold uppercase tracking-wide text-accent">
-            Contact
-          </p>
-          <h1 className="mt-2 text-3xl font-bold text-primary sm:text-4xl">
-            Contact Us
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
-            Share your name, phone, and a short note — we&apos;ll follow up with
-            next steps and scheduling.
+          <p className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-sm">Contact</p>
+          <h1 className="text-5xl md:text-7xl font-black text-white italic mb-8 uppercase">GET IN <span className="text-primary">TOUCH</span></h1>
+          <p className="max-w-xl text-gray-400 text-lg leading-relaxed">
+            Planning a construction project in Kerala? We provide detailed consultations and transparent pricing.
           </p>
         </Container>
       </div>
 
-      <Container className="grid gap-12 py-12 lg:grid-cols-2 lg:py-16">
-        <div>
-          <h2 className="text-lg font-semibold text-primary">Send a message</h2>
-          <p className="mt-2 text-sm text-slate-600">
-            Submitting opens your email app with the message pre-filled. You can
-            edit before sending.
-          </p>
-          <div className="mt-6">
+      <Container className="grid gap-16 pb-24 lg:grid-cols-2">
+        <div className="order-2 lg:order-1">
+          <div className="p-10 border border-white/10 bg-white/5 rounded-sm">
+            <h2 className="text-2xl font-black text-white uppercase italic tracking-wider mb-8">Send a <span className="text-primary">Msg</span></h2>
             <ContactForm />
           </div>
         </div>
 
-        <div>
-          <h2 className="text-lg font-semibold text-primary">Contact details</h2>
-          <ul className="mt-6 space-y-4 rounded-2xl border border-slate-100 bg-white p-6 shadow-md">
-            <li className="flex gap-3">
-              <Phone className="h-5 w-5 shrink-0 text-accent" aria-hidden />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Phone
-                </p>
-                <a
-                  href={`tel:${site.phoneRaw}`}
-                  className="font-medium text-primary hover:text-accent"
-                >
+        <div className="order-1 lg:order-2 space-y-12">
+          <div className="grid gap-8 sm:grid-cols-2">
+            <div className="flex gap-4 p-8 border border-white/10 bg-white/5 rounded-sm">
+              <div className="h-12 w-12 flex items-center justify-center bg-primary text-black shrink-0">
+                <Phone className="h-6 w-6" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Call Us</span>
+                <a href={`tel:${site.phoneRaw}`} className="text-white font-bold text-lg hover:text-primary transition-colors italic">
                   {site.phone}
                 </a>
               </div>
-            </li>
-            <li className="flex gap-3">
-              <MapPin className="h-5 w-5 shrink-0 text-accent" aria-hidden />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Address
-                </p>
-                <p className="font-medium text-slate-700">{fullAddress()}</p>
+            </div>
+            <div className="flex gap-4 p-8 border border-white/10 bg-white/5 rounded-sm">
+              <div className="h-12 w-12 flex items-center justify-center bg-primary text-black shrink-0">
+                <Mail className="h-6 w-6" />
               </div>
-            </li>
-            <li className="flex gap-3">
-              <Mail className="h-5 w-5 shrink-0 text-accent" aria-hidden />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Email
-                </p>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="font-medium text-primary hover:text-accent"
-                >
+              <div className="flex flex-col">
+                <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Email Us</span>
+                <a href={`mailto:${site.email}`} className="text-white font-bold text-lg hover:text-primary transition-colors italic break-all">
                   {site.email}
                 </a>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
 
-          <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-md">
-            <iframe
-              title={`Map — ${site.name}`}
-              src={mapsEmbedSrc()}
-              className="h-64 w-full border-0 md:h-80"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
+          <div className="p-8 border border-white/10 bg-white/5 rounded-sm">
+            <div className="flex gap-4 mb-8">
+              <div className="h-12 w-12 flex items-center justify-center bg-primary text-black shrink-0">
+                <MapPin className="h-6 w-6" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Office Location</span>
+                <p className="text-white font-bold leading-relaxed">
+                  {fullAddress()}
+                </p>
+              </div>
+            </div>
+            
+            <div className="overflow-hidden rounded-sm grayscale group hover:grayscale-0 transition-all duration-700">
+              <iframe
+                title={`Map — ${site.name}`}
+                src={mapsEmbedSrc()}
+                className="h-64 w-full border-0 md:h-80"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       </Container>
