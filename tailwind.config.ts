@@ -9,14 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#FFD700", // Yellow accent
-        secondary: "#000000", // Pure black
-        accent: "#FACC15", // Construction yellow
-        dark: "#121212", // Off black for cards
+        primary: "#F59E0B", // Bright Amber
+        secondary: "#FFFFFF", // Bright White
+        accent: "#B87333", // Copper accent
+        dark: "#121212", // Deep Grey/Black
+        light: "#F8FAFC", // Bright slate
       },
       fontFamily: {
-        poppins: ["var(--font-poppins)", "sans-serif"],
-        inter: ["var(--font-inter)", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
+        sans: ["var(--font-inter)", "sans-serif"],
       },
     },
   },

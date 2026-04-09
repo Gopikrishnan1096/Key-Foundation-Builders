@@ -26,56 +26,58 @@ export function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="space-y-5 rounded-2xl border border-slate-100 bg-white p-6 shadow-md md:p-8"
+      className="space-y-8 bg-transparent"
     >
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-primary">
-          Name
+      <div className="space-y-2">
+        <label htmlFor="name" className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">
+          Full Identity
         </label>
         <input
           id="name"
           name="name"
           type="text"
           required
+          placeholder="Your Name"
           autoComplete="name"
-          className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/30"
+          className="w-full border-b border-zinc-200 bg-transparent py-4 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
         />
       </div>
-      <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-primary">
-          Phone
+      <div className="space-y-2">
+        <label htmlFor="phone" className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">
+          Contact Number
         </label>
         <input
           id="phone"
           name="phone"
           type="tel"
           required
+          placeholder="Phone Number"
           autoComplete="tel"
-          className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/30"
+          className="w-full border-b border-zinc-200 bg-transparent py-4 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
         />
       </div>
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-primary">
-          Message
+      <div className="space-y-2">
+        <label htmlFor="message" className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">
+          Vision / Message
         </label>
         <textarea
           id="message"
           name="message"
           required
           rows={5}
-          className="mt-2 w-full resize-y rounded-lg border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/30"
+          placeholder="Tell us about your project..."
+          className="w-full border-b border-zinc-200 bg-transparent py-4 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400 resize-none"
         />
       </div>
       <button
         type="submit"
-        className="w-full rounded-lg bg-accent py-3 text-sm font-semibold text-primary shadow-md transition hover:bg-amber-400 sm:w-auto sm:px-10"
+        className="w-full bg-primary text-white py-5 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:bg-zinc-900"
       >
-        Submit
+        Submit Inquiry
       </button>
       {status === "sent" ? (
-        <p className="text-sm text-green-700" role="status">
-          Thanks — your mail client should open with the message pre-filled. If
-          nothing opens, call us directly from the details below.
+        <p className="text-xs text-primary font-bold uppercase tracking-widest mt-4" role="status">
+          ✓ Inquiry Dispatched to Engineering Team
         </p>
       ) : null}
     </form>

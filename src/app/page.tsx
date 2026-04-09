@@ -9,9 +9,11 @@ import { Testimonials } from "@/components/home/Testimonials";
 import { HomeCta } from "@/components/home/HomeCta";
 import { site } from "@/lib/site";
 
+import { BrandStory } from "@/components/home/BrandStory";
+
 export const metadata: Metadata = {
-  title: `${site.name} | Best Construction Company in Kochi, Kerala`,
-  description: `Kerala's trusted construction company — Key Foundation Builders. 10+ years experience, 50+ projects completed across Kochi, Thrissur, Kozhikode & all of Kerala. Specialising in house construction, commercial buildings & warehouses. Call today for a free site visit.`,
+  title: `${site.name} | Premium Builders & Construction Company in Kerala`,
+  description: `Kerala's premier luxury construction company — Key Foundation Builders. Redefining landmarks with architectural excellence. 10+ years of trust in Kochi, Ernakulam & across Kerala.`,
   alternates: {
     canonical: site.siteUrl,
   },
@@ -21,6 +23,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <BrandStory />
       <ServicesPreview />
       <FeaturedProjects />
       <EstimateCalculator />

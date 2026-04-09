@@ -42,75 +42,74 @@ export function QuickEnquiryForm() {
   }
 
   return (
-    <div className="w-full rounded-sm border border-white/10 bg-black/40 p-8 shadow-2xl backdrop-blur-xl">
-      <div className="mb-6">
-        <h3 className="text-2xl font-black text-white uppercase italic tracking-wider">GET A <span className="text-primary">QUOTE</span></h3>
-        <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Free Consultation & Estimate</p>
+    <div className="w-full bg-white/50 p-8 md:p-10 border border-zinc-200 backdrop-blur-3xl">
+      <div className="mb-10">
+        <h3 className="text-2xl font-serif text-zinc-900 italic">Signature Inquiry</h3>
+        <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.2em] mt-2">Personalized Consultation</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name */}
-        <div className="space-y-1">
-          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full Name</label>
+        <div className="space-y-2">
+          <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Full Identity</label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
+            <User className="absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
             <input
               required
               type="text"
-              placeholder="John Doe"
+              placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-sm border border-white/10 bg-white/5 py-3 pl-10 pr-3 text-sm text-white outline-none transition focus:border-primary focus:bg-white/10"
+              className="w-full border-b border-zinc-200 bg-transparent py-4 pl-8 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-8">
           {/* Phone */}
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Phone</label>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Contact Number</label>
             <div className="relative">
-              <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
+              <Phone className="absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
               <input
                 required
                 type="tel"
-                placeholder="9645..."
+                placeholder="Phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full rounded-sm border border-white/10 bg-white/5 py-3 pl-10 pr-3 text-sm text-white outline-none transition focus:border-primary"
+                className="w-full border-b border-zinc-200 bg-transparent py-4 pl-8 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
               />
             </div>
           </div>
           {/* Location */}
-          <div className="space-y-1">
-            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Location</label>
-            <div className="relative">
-              <input
-                required
-                type="text"
-                placeholder="Kochi, Kerala"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="w-full rounded-sm border border-white/10 bg-white/5 py-3 px-3 text-sm text-white outline-none transition focus:border-primary"
-              />
-            </div>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Desired Location</label>
+            <input
+              required
+              type="text"
+              placeholder="E.g. Kochi"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="w-full border-b border-zinc-200 bg-transparent py-4 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
+            />
           </div>
         </div>
 
         {/* Project Type */}
-        <div className="space-y-1 text-white">
-          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Project Type</label>
+        <div className="space-y-2">
+          <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Architectural Interest</label>
           <div className="relative">
-            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
+            <ChevronDown className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
             <select
+              aria-label="Project Type"
               required
               value={projectType}
               onChange={(e) => setProjectType(e.target.value)}
-              className="w-full appearance-none rounded-sm border border-white/10 bg-white/5 py-3 pl-4 pr-10 text-sm text-white outline-none transition focus:border-primary"
+              className="w-full appearance-none border-b border-zinc-200 bg-transparent py-4 text-sm text-zinc-900 outline-none transition-all focus:border-primary"
             >
-              <option value="" className="bg-black">Select Type</option>
+              <option value="" className="bg-white">Select Project Type</option>
               {projectTypes.map((t) => (
-                <option key={t} value={t} className="bg-black">
+                <option key={t} value={t} className="bg-white">
                   {t}
                 </option>
               ))}
@@ -118,34 +117,22 @@ export function QuickEnquiryForm() {
           </div>
         </div>
 
-        {/* Budget Range */}
-        <div className="space-y-1">
-          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Approx Budget</label>
-          <input
-            type="text"
-            placeholder="e.g. 50 Lakhs"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            className="w-full rounded-sm border border-white/10 bg-white/5 py-3 px-4 text-sm text-white outline-none transition focus:border-primary"
-          />
-        </div>
-
         {/* Submit */}
         <button
           type="submit"
           disabled={submitted}
-          className={`flex w-full items-center justify-center gap-3 rounded-sm py-4 text-sm font-black uppercase tracking-widest transition-all ${
+          className={`group mt-8 flex w-full items-center justify-center gap-4 py-5 text-[10px] font-bold uppercase tracking-[0.3em] transition-all ${
             submitted
               ? "bg-green-600 text-white"
-              : "bg-primary text-black hover:bg-white hover:scale-[1.02]"
+              : "bg-primary text-white hover:bg-zinc-900"
           }`}
         >
           {submitted ? (
-            <>✓ Lead Sent via WhatsApp</>
+            <>✓ Dispatched</>
           ) : (
             <>
-              <Send className="h-4 w-4" />
-              Send Enquiry
+              Request Presentation
+              <Send className="h-3 w-3 transition-transform group-hover:translate-x-1" />
             </>
           )}
         </button>

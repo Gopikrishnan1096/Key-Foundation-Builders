@@ -10,10 +10,15 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="bg-black min-h-screen pt-24">
-      <div className="container mx-auto px-4 py-16">
-        <p className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-sm text-center">Portfolio</p>
-        <h1 className="text-5xl md:text-7xl font-black text-white italic text-center mb-16 uppercase">OUR <span className="text-primary">WORKS</span></h1>
+    <div className="bg-black min-h-screen pt-32 md:pt-40">
+      <div className="container mx-auto px-6 py-20">
+        <div className="text-center mb-24 max-w-2xl mx-auto">
+          <p className="text-primary font-bold tracking-[0.4em] uppercase mb-6 text-xs text-center">Our Portfolio</p>
+          <h1 className="text-5xl md:text-8xl font-serif text-white leading-tight text-center">
+            Signature <br />
+            <span className="italic text-primary">Success</span>
+          </h1>
+        </div>
         <ProjectsClient projects={projects} />
       </div>
     </div>

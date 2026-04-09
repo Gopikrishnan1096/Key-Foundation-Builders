@@ -21,13 +21,8 @@ export function ProjectsClient({ projects }: Props) {
 
   return (
     <Container className="py-12 md:py-16">
-      <SectionHeading
-        title="Our Projects"
-        subtitle="Explore recent deliveries across residential, commercial, and industrial work."
-      />
-
       <div
-        className="mb-12 flex flex-wrap justify-center gap-4"
+        className="mb-20 flex flex-wrap justify-center gap-8"
         role="tablist"
         aria-label="Filter projects"
       >
@@ -38,12 +33,12 @@ export function ProjectsClient({ projects }: Props) {
               key={c.id}
               type="button"
               role="tab"
-              aria-selected={active}
+              aria-selected={active ? "true" : "false"}
               onClick={() => setFilter(c.id)}
-              className={`rounded-sm px-6 py-2.5 text-xs font-black uppercase tracking-widest transition-all ${
+              className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all pb-2 border-b-2 ${
                 active
-                  ? "bg-primary text-black"
-                  : "bg-white/5 text-gray-500 hover:bg-white/10 hover:text-white border border-white/5"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-zinc-500 hover:text-zinc-900"
               }`}
             >
               {c.label}
@@ -53,9 +48,9 @@ export function ProjectsClient({ projects }: Props) {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-center text-slate-600">No projects in this category yet.</p>
+        <p className="text-center text-zinc-500 font-serif italic">No projects in this category yet.</p>
       ) : (
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p) => (
             <ProjectCard key={p.slug} project={p} />
           ))}

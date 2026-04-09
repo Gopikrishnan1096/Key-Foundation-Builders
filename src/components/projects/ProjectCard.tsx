@@ -11,24 +11,26 @@ export function ProjectCard({ project }: Props) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group relative overflow-hidden bg-white/5 border border-white/10 rounded-sm aspect-[4/5] flex flex-col justify-end p-8 transition-all hover:bg-white/10 hover:border-primary/50"
+      className="group relative overflow-hidden bg-white aspect-[3/4] flex flex-col justify-end p-10 transition-all duration-700"
     >
       <div className="absolute inset-0 z-0">
         <ImageSrc src={cover} alt={project.name} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
       </div>
       
-      <div className="relative z-10 transform transition-transform group-hover:translate-y-[-10px] duration-500">
-        <p className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-2">{project.location}</p>
-        <h3 className="text-2xl font-black text-white uppercase leading-tight">
+      <div className="relative z-10 transform transition-all duration-500 group-hover:translate-y-[-10px]">
+        <p className="text-primary text-[10px] font-bold uppercase tracking-[0.3em] mb-4">{project.location}</p>
+        <h3 className="text-2xl md:text-3xl font-serif text-white uppercase leading-tight mb-6">
           {project.name}
         </h3>
-        <p className="mt-4 text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
-          {project.sqft.toLocaleString()} SQFT <span className="h-1 w-1 bg-primary rounded-full"></span> {project.year}
-        </p>
+        <div className="flex items-center gap-4 text-[10px] font-bold text-white/50 uppercase tracking-[0.2em] pt-6 border-t border-white/10">
+          <span>{project.sqft.toLocaleString()} SQFT</span>
+          <div className="h-1 w-1 bg-primary rounded-full"></div>
+          <span>{project.year}</span>
+        </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
+      <div className="absolute inset-0 border border-zinc-200 group-hover:border-primary/30 transition-all duration-700"></div>
     </Link>
   );
 }

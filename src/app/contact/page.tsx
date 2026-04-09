@@ -11,65 +11,67 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-black min-h-screen pt-24">
+    <div className="bg-slate-50 min-h-screen pt-32 md:pt-40">
       <div className="py-20">
         <Container>
-          <p className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-sm">Contact</p>
-          <h1 className="text-5xl md:text-7xl font-black text-white italic mb-8 uppercase">GET IN <span className="text-primary">TOUCH</span></h1>
-          <p className="max-w-xl text-gray-400 text-lg leading-relaxed">
-            Planning a construction project in Kerala? We provide detailed consultations and transparent pricing.
-          </p>
+          <div className="text-center mb-24 max-w-2xl mx-auto">
+            <p className="text-primary font-bold tracking-[0.4em] uppercase mb-6 text-xs text-center">Inquiry</p>
+            <h1 className="text-5xl md:text-8xl font-serif text-zinc-900 leading-tight text-center">
+              Get in <br />
+              <span className="italic text-primary">Touch</span>
+            </h1>
+          </div>
         </Container>
       </div>
 
-      <Container className="grid gap-16 pb-24 lg:grid-cols-2">
+      <Container className="grid gap-20 pb-32 lg:grid-cols-2">
         <div className="order-2 lg:order-1">
-          <div className="p-10 border border-white/10 bg-white/5 rounded-sm">
-            <h2 className="text-2xl font-black text-white uppercase italic tracking-wider mb-8">Send a <span className="text-primary">Msg</span></h2>
+          <div className="p-10 md:p-14 bg-white border border-zinc-200">
+            <h2 className="text-3xl font-serif text-zinc-900 mb-10 italic">Send an Inquiry</h2>
             <ContactForm />
           </div>
         </div>
 
-        <div className="order-1 lg:order-2 space-y-12">
-          <div className="grid gap-8 sm:grid-cols-2">
-            <div className="flex gap-4 p-8 border border-white/10 bg-white/5 rounded-sm">
-              <div className="h-12 w-12 flex items-center justify-center bg-primary text-black shrink-0">
-                <Phone className="h-6 w-6" />
+        <div className="order-1 lg:order-2 space-y-16">
+          <div className="grid gap-12 sm:grid-cols-2">
+            <div className="flex flex-col gap-6">
+              <div className="h-14 w-14 flex items-center justify-center bg-white text-primary border border-zinc-200">
+                <Phone className="h-5 w-5" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Call Us</span>
-                <a href={`tel:${site.phoneRaw}`} className="text-white font-bold text-lg hover:text-primary transition-colors italic">
+                <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-2">Private Line</span>
+                <a href={`tel:${site.phoneRaw}`} className="text-zinc-900 font-serif text-xl hover:text-primary transition-colors">
                   {site.phone}
                 </a>
               </div>
             </div>
-            <div className="flex gap-4 p-8 border border-white/10 bg-white/5 rounded-sm">
-              <div className="h-12 w-12 flex items-center justify-center bg-primary text-black shrink-0">
-                <Mail className="h-6 w-6" />
+            <div className="flex flex-col gap-6">
+              <div className="h-14 w-14 flex items-center justify-center bg-white text-primary border border-zinc-200">
+                <Mail className="h-5 w-5" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Email Us</span>
-                <a href={`mailto:${site.email}`} className="text-white font-bold text-lg hover:text-primary transition-colors italic break-all">
+                <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-2">Electronic Mail</span>
+                <a href={`mailto:${site.email}`} className="text-zinc-900 font-serif text-xl hover:text-primary transition-colors break-all">
                   {site.email}
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="p-8 border border-white/10 bg-white/5 rounded-sm">
-            <div className="flex gap-4 mb-8">
-              <div className="h-12 w-12 flex items-center justify-center bg-primary text-black shrink-0">
-                <MapPin className="h-6 w-6" />
+          <div className="space-y-10">
+            <div className="flex flex-col gap-6">
+              <div className="h-14 w-14 flex items-center justify-center bg-white text-primary border border-zinc-200">
+                <MapPin className="h-5 w-5" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Office Location</span>
-                <p className="text-white font-bold leading-relaxed">
+                <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-2">Headquarters</span>
+                <p className="text-zinc-900 font-serif text-lg leading-relaxed max-w-sm">
                   {fullAddress()}
                 </p>
               </div>
             </div>
             
-            <div className="overflow-hidden rounded-sm grayscale group hover:grayscale-0 transition-all duration-700">
+            <div className="overflow-hidden border border-zinc-200 grayscale group hover:grayscale-0 transition-all duration-1000">
               <iframe
                 title={`Map — ${site.name}`}
                 src={mapsEmbedSrc()}

@@ -14,102 +14,86 @@ const quick = [
 
 export function Footer() {
   return (
-    <footer className="bg-black border-t border-white/5 pt-20 pb-10">
+    <footer className="bg-slate-50 border-t border-zinc-200 pt-32 pb-16">
       <Container>
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div className="space-y-6">
-            <Logo variant="footer" onDarkBackground={true} />
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">{site.tagline}</p>
-            <div className="flex gap-4">
+        <div className="grid gap-20 lg:grid-cols-2">
+          <div className="space-y-12">
+            <div>
+              <Logo variant="footer" onDarkBackground={false} />
+              <p className="text-zinc-600 text-sm leading-relaxed max-w-sm mt-8 italic font-serif">
+                "{site.tagline}"
+              </p>
+            </div>
+            
+            <div className="flex gap-8">
               {[
-                { icon: Facebook, href: site.social.facebook },
-                { icon: Instagram, href: site.social.instagram },
-                { icon: Youtube, href: site.social.youtube }
+                { icon: Facebook, href: site.social.facebook, label: "Facebook" },
+                { icon: Instagram, href: site.social.instagram, label: "Instagram" },
+                { icon: Youtube, href: site.social.youtube, label: "Youtube" }
               ].map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
-                  className="h-10 w-10 flex items-center justify-center border border-white/10 hover:bg-primary hover:text-black transition-all text-gray-400"
+                  className="group flex flex-col items-center gap-2"
+                  aria-label={social.label}
                 >
-                  <social.icon className="h-5 w-5" />
+                  <div className="h-12 w-12 flex items-center justify-center bg-white border border-zinc-200 group-hover:bg-primary transition-all">
+                    <social.icon className="h-5 w-5 text-zinc-600 group-hover:text-white transition-colors" />
+                  </div>
                 </a>
               ))}
             </div>
           </div>
 
-          <div>
-            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-8">Navigation</h4>
-            <ul className="space-y-4">
-              {quick.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-gray-400 text-sm hover:text-primary transition-colors uppercase tracking-widest font-bold"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-8">Contact Us</h4>
-            <ul className="space-y-6">
-              <li className="flex gap-4">
-                <div className="h-10 w-10 flex items-center justify-center bg-white/5 text-primary shrink-0">
-                  <Phone className="h-4 w-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-gray-500 font-black uppercase">Call Support</span>
-                  <a href={`tel:${site.phoneRaw}`} className="text-white font-bold hover:text-primary transition-colors">
-                    {site.phone}
-                  </a>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <div className="h-10 w-10 flex items-center justify-center bg-white/5 text-primary shrink-0">
-                  <Mail className="h-4 w-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-gray-500 font-black uppercase">Email Us</span>
-                  <a href={`mailto:${site.email}`} className="text-white font-bold hover:text-primary transition-colors">
-                    {site.email}
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-8">Location</h4>
-            <div className="flex gap-4">
-              <div className="h-10 w-10 flex items-center justify-center bg-white/5 text-primary shrink-0">
-                <MapPin className="h-4 w-4" />
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {fullAddress()}
-              </p>
+          <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-3">
+            <div>
+              <h4 className="text-zinc-900 font-bold uppercase tracking-[0.3em] text-[10px] mb-10">Navigation</h4>
+              <ul className="space-y-6">
+                {quick.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="text-zinc-600 text-xs hover:text-primary transition-colors uppercase tracking-widest font-bold"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="mt-8">
-              <Link
-                href="/contact"
-                className="inline-block bg-primary text-black px-8 py-4 text-xs font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1"
-              >
-                Send Message
-              </Link>
+
+            <div className="md:col-span-2">
+              <h4 className="text-zinc-900 font-bold uppercase tracking-[0.3em] text-[10px] mb-10">Contact</h4>
+              <div className="space-y-10">
+                <div className="flex gap-6">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-2">Private Line</span>
+                    <a href={`tel:${site.phoneRaw}`} className="text-zinc-900 text-lg font-serif hover:text-primary transition-colors">
+                      {site.phone}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-6">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-2">Office Headquarters</span>
+                    <p className="text-zinc-900 text-sm font-serif leading-relaxed max-w-xs">
+                      {fullAddress()}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-loose text-center md:text-left">
-            © {new Date().getFullYear()} {site.name}. <br className="md:hidden" />
-            Designed for Excellence in Kerala.
+        <div className="mt-32 pt-12 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-[0.3em] leading-loose text-center md:text-left">
+            © {new Date().getFullYear()} {site.name}. 
+            Architectural Excellence in Kerala.
           </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-[10px] text-gray-500 font-bold uppercase tracking-widest hover:text-white transition-colors">Privacy</Link>
-            <Link href="/terms" className="text-[10px] text-gray-500 font-bold uppercase tracking-widest hover:text-white transition-colors">Terms</Link>
+          <div className="flex gap-10">
+            <Link href="/privacy" className="text-[10px] text-zinc-600 font-bold uppercase tracking-[0.3em] hover:text-zinc-900 transition-colors">Privacy</Link>
+            <Link href="/terms" className="text-[10px] text-zinc-600 font-bold uppercase tracking-[0.3em] hover:text-zinc-900 transition-colors">Terms</Link>
           </div>
         </div>
       </Container>

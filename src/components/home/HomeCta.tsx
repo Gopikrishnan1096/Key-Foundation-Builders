@@ -6,61 +6,63 @@ import { QuickEnquiryForm } from "@/components/home/QuickEnquiryForm";
 
 export function HomeCta() {
   return (
-    <section className="bg-black py-24 relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 transform translate-x-1/2"></div>
+    <section className="bg-white py-24 md:py-40 relative overflow-hidden border-t border-zinc-200">
+      {/* Editorial Background Accent */}
+      <div className="absolute top-0 right-0 w-2/3 h-full bg-slate-50 -skew-x-12 transform translate-x-1/4" />
       
       <Container className="relative z-10">
-        <div className="flex flex-col gap-16 lg:flex-row lg:items-center">
+        <div className="flex flex-col gap-24 lg:flex-row lg:items-center">
           {/* Left: Copy */}
           <div className="flex-1">
-            <p className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-sm">
-              Ready to Begin?
+            <p className="text-primary font-bold tracking-[0.4em] uppercase mb-8 text-xs">
+              Next Step
             </p>
-            <h2 className="text-4xl md:text-6xl font-black text-white italic leading-tight">
-              GET A FREE <span className="text-primary">SITE VISIT</span> <br /> & ESTIMATE
+            <h2 className="text-4xl md:text-7xl font-serif text-zinc-900 leading-tight">
+              Begin Your <br />
+              <span className="italic text-primary">Masterpiece</span>
             </h2>
-            <p className="mt-8 max-w-xl text-gray-400 text-lg leading-relaxed">
-              Tell us about your project and we&apos;ll arrange a free on-site
-              consultation. No commitment — just honest advice from Kerala&apos;s
-              trusted construction experts.
+            <p className="mt-10 max-w-xl text-zinc-600 text-lg leading-relaxed">
+              Experience the pinnacle of Kerala&apos;s architectural execution. 
+              Schedule a private consultation to discuss your vision with 
+              our lead engineering team.
             </p>
 
-            {/* Trust signals */}
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-8">
               {[
-                "Free site visit — no obligation",
-                "Detailed estimate in 48 hours",
-                "10+ years of experience",
-                "Serving all districts of Kerala",
+                "Complimentary Site Appraisal",
+                "Fixed-Price Engineering Quote",
+                "Advanced Resource Planning",
+                "Statewide Project Coverage",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-3 text-white font-bold uppercase tracking-widest text-[10px]">
-                  <div className="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                <div key={item} className="flex items-center gap-4 text-zinc-600 font-bold uppercase tracking-widest text-[10px]">
+                  <div className="h-[1px] w-6 bg-primary" />
                   {item}
                 </div>
               ))}
             </div>
 
-            {/* Phone CTA */}
-            <div className="mt-12">
+            <div className="mt-16">
               <a
                 href={`tel:${site.phoneRaw}`}
-                className="group inline-flex items-center gap-4 text-white hover:text-primary transition-colors"
+                className="group inline-flex items-center gap-6 text-zinc-900 hover:text-primary transition-all pb-4 border-b border-zinc-200"
               >
-                <div className="flex h-12 w-12 items-center justify-center bg-white/10 group-hover:bg-primary group-hover:text-black transition-all">
-                  <Phone className="h-5 w-5" aria-hidden />
+                <div className="flex h-12 w-12 items-center justify-center bg-slate-50 border border-zinc-200 group-hover:bg-primary group-hover:text-white transition-all">
+                  <Phone className="h-4 w-4" aria-hidden />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Call Us Anytime</span>
-                  <span className="text-xl font-black">{site.phone}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Private Line</span>
+                  <span className="text-2xl font-serif">{site.phone}</span>
                 </div>
               </a>
             </div>
           </div>
 
-          {/* Right: Quick Enquiry Form */}
-          <div className="w-full shrink-0 lg:max-w-lg">
-            <QuickEnquiryForm />
+          <div className="w-full shrink-0 lg:max-w-xl">
+            <div className="p-[1px] bg-gradient-to-br from-zinc-200 to-transparent">
+              <div className="bg-slate-50 p-10 md:p-12 shadow-sm">
+                <QuickEnquiryForm />
+              </div>
+            </div>
           </div>
         </div>
       </Container>

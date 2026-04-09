@@ -42,7 +42,7 @@ export function Header() {
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-      scrolled ? "bg-black/90 border-b border-white/10 backdrop-blur-md shadow-lg" : "bg-transparent"
+      scrolled ? "bg-white/95 border-b border-zinc-200 backdrop-blur-md shadow-sm" : "bg-transparent"
     }`}>
       <div
         className={`mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
@@ -51,19 +51,19 @@ export function Header() {
       >
         <Logo
           variant="header"
-          onDarkBackground={true}
+          onDarkBackground={false}
           isHome={isHome}
         />
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-12 md:flex" aria-label="Main">
           {nav.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-all hover:scale-110 ${
-                  active ? "text-primary" : "text-gray-300 hover:text-primary"
+                className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:text-primary ${
+                  active ? "text-primary border-b border-primary/40 pb-1" : "text-zinc-600"
                 }`}
               >
                 {item.label}
@@ -75,9 +75,9 @@ export function Header() {
         <div className="hidden md:block">
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-sm bg-primary px-6 py-2.5 text-sm font-bold text-black uppercase tracking-wider transition-all hover:bg-white hover:scale-105"
+            className="group inline-flex items-center bg-primary px-8 py-3 text-[10px] font-bold text-white uppercase tracking-[0.2em] transition-all hover:bg-zinc-900"
           >
-            Get Quote
+            Inquire Now
           </Link>
         </div>
 
@@ -96,17 +96,17 @@ export function Header() {
       {/* Mobile Menu */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-40 bg-black/95 transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-md transition-all duration-300 md:hidden ${
           open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
       >
         <div className="flex flex-col h-full pt-24 px-6">
-          <nav className="flex flex-col gap-6" aria-label="Mobile">
+          <nav className="flex flex-col gap-10" aria-label="Mobile">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-2xl font-bold text-white hover:text-primary transition-colors"
+                className="text-3xl font-serif text-zinc-900 hover:text-primary transition-colors italic"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -114,10 +114,10 @@ export function Header() {
             ))}
             <Link
               href="/contact"
-              className="mt-8 inline-flex justify-center rounded-sm bg-primary px-6 py-4 text-center text-lg font-bold text-black uppercase"
+              className="mt-12 inline-flex justify-center bg-primary px-6 py-5 text-center text-[10px] font-bold text-white uppercase tracking-[0.3em]"
               onClick={() => setOpen(false)}
             >
-              Get Quote
+              Request Consultation
             </Link>
           </nav>
         </div>

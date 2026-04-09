@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Main } from "@/components/layout/Main";
@@ -8,10 +8,9 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { site } from "@/lib/site";
 
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -73,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="min-h-screen font-sans pb-mobile-bar md:pb-0">
         <a
           href="#main-content"
