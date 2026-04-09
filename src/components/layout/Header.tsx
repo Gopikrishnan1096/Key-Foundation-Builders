@@ -21,7 +21,8 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   const isHome = pathname === "/";
-  const onDarkBackground = isHome && !scrolled;
+  // Home hero has a light overlay, so treat as light background.
+  const onDarkBackground = false;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
