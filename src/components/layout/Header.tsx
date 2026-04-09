@@ -21,6 +21,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   const isHome = pathname === "/";
+  const onDarkBackground = isHome && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -51,7 +52,7 @@ export function Header() {
       >
         <Logo
           variant="header"
-          onDarkBackground={false}
+          onDarkBackground={onDarkBackground}
           isHome={isHome}
         />
 

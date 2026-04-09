@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import Image from "next/image";
 
 export function BrandStory() {
   return (
@@ -6,10 +7,12 @@ export function BrandStory() {
       <Container>
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           <div className="relative aspect-square overflow-hidden group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1503387762-592be585d5f8?auto=format&fit=crop&q=80&w=1000"
               alt="Architectural details"
-              className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
             />
             <div className="absolute inset-0 border-[20px] border-white/20 m-8" />
           </div>

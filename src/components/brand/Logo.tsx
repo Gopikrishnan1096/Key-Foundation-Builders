@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { site } from "@/lib/site";
 
 type Props = {
   variant?: "header" | "footer";
@@ -43,7 +44,7 @@ export function Logo({
   const img = (
     <Image
       src="/logo.png"
-      alt="Key Foundation Builders"
+      alt={site.name}
       width={imgSize[variant].width}
       height={imgSize[variant].height}
       sizes={
