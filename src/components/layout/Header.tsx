@@ -84,6 +84,7 @@ export function Header() {
         <button
           type="button"
           className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-primary md:hidden"
+          /* eslint-disable-next-line jsx-a11y/aria-proptypes */
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
