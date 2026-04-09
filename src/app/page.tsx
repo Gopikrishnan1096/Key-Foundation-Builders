@@ -3,6 +3,7 @@ import { Hero } from "@/components/home/Hero";
 import { StatsCounters } from "@/components/home/StatsCounters";
 import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { FeaturedProjects } from "@/components/home/FeaturedProjects";
+import { EstimateCalculator } from "@/components/home/EstimateCalculator";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { Testimonials } from "@/components/home/Testimonials";
 import { HomeCta } from "@/components/home/HomeCta";
@@ -20,9 +21,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <StatsCounters />
       <ServicesPreview />
       <FeaturedProjects />
+      <EstimateCalculator />
       <WhyChooseUs />
       <Testimonials />
       <HomeCta />

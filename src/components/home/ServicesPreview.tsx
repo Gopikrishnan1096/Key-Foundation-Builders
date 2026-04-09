@@ -5,30 +5,36 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function ServicesPreview() {
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-24 bg-black">
       <Container>
-        <SectionHeading
-          eyebrow="What we do"
-          title="Services"
-          subtitle="End-to-end civil and structural execution for projects across Kerala."
-        />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="text-center mb-16">
+          <p className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-sm">Expertise</p>
+          <h2 className="text-4xl md:text-6xl font-black text-white italic">OUR <span className="text-primary">SERVICES</span></h2>
+        </div>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {servicePreviews.map((s) => (
             <Link
               key={s.id}
               href={s.href}
-              className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl"
+              className="group relative rounded-sm border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-primary/50"
             >
+              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full group-hover:bg-primary/10 transition-colors"></div>
+              
               <s.icon
-                className="h-10 w-10 text-accent transition group-hover:scale-110"
+                className="relative h-12 w-12 text-primary mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3"
                 aria-hidden
               />
-              <h3 className="mt-4 font-semibold text-primary group-hover:text-accent">
+              <h3 className="relative text-xl font-black text-white uppercase tracking-wider group-hover:text-primary transition-colors">
                 {s.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              <p className="relative mt-4 text-sm leading-relaxed text-gray-400 group-hover:text-gray-300">
                 {s.short}
               </p>
+
+              <div className="mt-8 flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                Learn More <div className="h-0.5 w-6 bg-primary"></div>
+              </div>
             </Link>
           ))}
         </div>

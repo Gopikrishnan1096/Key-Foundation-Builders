@@ -37,26 +37,34 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-16 md:py-20">
+    <section className="bg-black py-24 border-t border-white/5">
       <Container>
-        <SectionHeading
-          eyebrow="Why us"
-          title="Why Choose Key Foundation Builders"
-          subtitle="We combine site discipline with clear communication so your build stays predictable."
-        />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({ icon: Icon, title, desc }) => (
-            <div
-              key={title}
-              className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition group-hover:bg-accent/20">
-                <Icon className="h-6 w-6 text-accent" aria-hidden />
+        <div className="flex flex-col md:flex-row gap-12 items-center">
+          <div className="md:w-1/3">
+            <p className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-sm">Why Us</p>
+            <h2 className="text-4xl md:text-5xl font-black text-white italic leading-tight">THE <span className="text-primary">DIFFERENCE</span> WE BUILD</h2>
+            <p className="text-gray-400 mt-6 text-lg">
+              We combine traditional structural integrity with modern engineering discipline.
+            </p>
+            <div className="mt-8 h-1 w-24 bg-primary"></div>
+          </div>
+
+          <div className="md:w-2/3 grid gap-6 sm:grid-cols-2">
+            {features.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="group relative rounded-sm border border-white/10 bg-white/5 p-8 transition-all hover:bg-white/10"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary transform group-hover:rotate-12 transition-transform">
+                    <Icon className="h-6 w-6 text-black" aria-hidden />
+                  </div>
+                  <h3 className="font-black text-white uppercase tracking-wider text-sm">{title}</h3>
+                </div>
+                <p className="text-sm leading-relaxed text-gray-400 group-hover:text-gray-300">{desc}</p>
               </div>
-              <h3 className="mt-4 font-bold text-primary">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Container>
     </section>

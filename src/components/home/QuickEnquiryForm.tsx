@@ -16,112 +16,140 @@ const projectTypes = [
 export function QuickEnquiryForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
   const [projectType, setProjectType] = useState("");
+  const [budget, setBudget] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const msg = [
-      `Hi ${site.name}! I'd like to enquire about a project.`,
-      `Name: ${name || "–"}`,
-      `Phone: ${phone || "–"}`,
-      `Project Type: ${projectType || "Not specified"}`,
-      `Please contact me at your earliest convenience. Thank you!`,
+      `🚀 *NEW LEAD FROM WEBSITE*`,
+      `--------------------------`,
+      `👤 *Name:* ${name || "–"}`,
+      `📞 *Phone:* ${phone || "–"}`,
+      `📍 *Location:* ${location || "–"}`,
+      `🏗️ *Project:* ${projectType || "–"}`,
+      `💰 *Budget:* ${budget || "–"}`,
+      `--------------------------`,
+      `Please contact this lead ASAP.`,
     ].join("\n");
 
-    const waUrl = `https://wa.me/${site.whatsappRaw}?text=${encodeURIComponent(msg)}`;
+    const waUrl = `https://wa.me/919645767050?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   }
 
   return (
-    <div className="w-full rounded-2xl border border-amber-200/60 bg-white/95 p-6 shadow-2xl backdrop-blur-sm">
-      {/* Header */}
-      <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-500 shadow-sm">
-          <MessageCircle className="h-5 w-5 text-white" />
-        </div>
-        <div>
-          <p className="text-sm font-bold text-gray-900">Free Consultation</p>
-          <p className="text-xs text-gray-500">Reply within 1 business day</p>
-        </div>
-        <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-0.5 text-xs font-semibold text-green-700">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
-          Online
-        </span>
+    <div className="w-full rounded-sm border border-white/10 bg-black/40 p-8 shadow-2xl backdrop-blur-xl">
+      <div className="mb-6">
+        <h3 className="text-2xl font-black text-white uppercase italic tracking-wider">GET A <span className="text-primary">QUOTE</span></h3>
+        <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Free Consultation & Estimate</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Name */}
-        <div className="relative">
-          <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+        <div className="space-y-1">
+          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full Name</label>
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
+            <input
+              required
+              type="text"
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full rounded-sm border border-white/10 bg-white/5 py-3 pl-10 pr-3 text-sm text-white outline-none transition focus:border-primary focus:bg-white/10"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          {/* Phone */}
+          <div className="space-y-1">
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Phone</label>
+            <div className="relative">
+              <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
+              <input
+                required
+                type="tel"
+                placeholder="9645..."
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full rounded-sm border border-white/10 bg-white/5 py-3 pl-10 pr-3 text-sm text-white outline-none transition focus:border-primary"
+              />
+            </div>
+          </div>
+          {/* Location */}
+          <div className="space-y-1">
+            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Location</label>
+            <div className="relative">
+              <input
+                required
+                type="text"
+                placeholder="Kochi, Kerala"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full rounded-sm border border-white/10 bg-white/5 py-3 px-3 text-sm text-white outline-none transition focus:border-primary"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Project Type */}
+        <div className="space-y-1 text-white">
+          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Project Type</label>
+          <div className="relative">
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
+            <select
+              required
+              value={projectType}
+              onChange={(e) => setProjectType(e.target.value)}
+              className="w-full appearance-none rounded-sm border border-white/10 bg-white/5 py-3 pl-4 pr-10 text-sm text-white outline-none transition focus:border-primary"
+            >
+              <option value="" className="bg-black">Select Type</option>
+              {projectTypes.map((t) => (
+                <option key={t} value={t} className="bg-black">
+                  {t}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Budget Range */}
+        <div className="space-y-1">
+          <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Approx Budget</label>
           <input
-            id="enquiry-name"
             type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-3 text-sm text-gray-900 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-400/20"
+            placeholder="e.g. 50 Lakhs"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+            className="w-full rounded-sm border border-white/10 bg-white/5 py-3 px-4 text-sm text-white outline-none transition focus:border-primary"
           />
-        </div>
-
-        {/* Phone */}
-        <div className="relative">
-          <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-          <input
-            id="enquiry-phone"
-            type="tel"
-            placeholder="Phone Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-3 text-sm text-gray-900 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-400/20"
-          />
-        </div>
-
-        {/* Project type */}
-        <div className="relative">
-          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-          <select
-            id="enquiry-project-type"
-            value={projectType}
-            onChange={(e) => setProjectType(e.target.value)}
-            aria-label="Project Type"
-            className="w-full appearance-none rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-3 pr-9 text-sm text-gray-700 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-400/20"
-          >
-            <option value="">Project Type</option>
-            {projectTypes.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
         </div>
 
         {/* Submit */}
         <button
-          id="enquiry-submit-btn"
           type="submit"
-          className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-bold shadow-md transition-all duration-200 ${
+          disabled={submitted}
+          className={`flex w-full items-center justify-center gap-3 rounded-sm py-4 text-sm font-black uppercase tracking-widest transition-all ${
             submitted
-              ? "bg-green-500 text-white"
-              : "bg-amber-400 text-gray-900 hover:bg-amber-500 hover:shadow-lg active:scale-[0.98]"
+              ? "bg-green-600 text-white"
+              : "bg-primary text-black hover:bg-white hover:scale-[1.02]"
           }`}
         >
           {submitted ? (
-            <>✓ Opening WhatsApp…</>
+            <>✓ Lead Sent via WhatsApp</>
           ) : (
             <>
               <Send className="h-4 w-4" />
-              Get Free Quote on WhatsApp
+              Send Enquiry
             </>
           )}
         </button>
       </form>
-
-      <p className="mt-3 text-center text-[11px] text-gray-400">
-        🔒 Your details are shared only via WhatsApp. No spam.
-      </p>
     </div>
   );
 }

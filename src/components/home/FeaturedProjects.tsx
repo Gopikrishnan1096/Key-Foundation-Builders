@@ -8,46 +8,49 @@ export function FeaturedProjects() {
   const featured = getFeaturedProjects(6);
 
   return (
-    <section className="bg-slate-50 py-16 md:py-20">
+    <section className="bg-dark py-24">
       <Container>
-        <SectionHeading
-          eyebrow="Portfolio"
-          title="Featured Projects"
-          subtitle="A snapshot of recent sites — from villas to warehouses."
-        />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div>
+            <p className="text-primary font-bold tracking-[0.3em] uppercase mb-4 text-sm">Portfolio</p>
+            <h2 className="text-4xl md:text-6xl font-black text-white italic">FEATURED <span className="text-primary">WORKS</span></h2>
+          </div>
+          <Link
+            href="/projects"
+            className="group flex items-center gap-3 text-white font-bold uppercase tracking-widest text-sm hover:text-primary transition-colors"
+          >
+            Explore All Projects <div className="h-0.5 w-12 bg-primary transition-all group-hover:w-20"></div>
+          </Link>
+        </div>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p) => (
             <Link
               key={p.slug}
               href={`/projects/${p.slug}`}
-              className="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl"
+              className="group relative overflow-hidden bg-black aspect-[3/4]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-slate-200">
-                <Image
-                  src={p.gallery[0]}
-                  alt={p.name}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 transition group-hover:opacity-100" />
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-primary group-hover:text-accent">
+              <Image
+                src={p.gallery[0]}
+                alt={p.name}
+                fill
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
+              
+              {/* Content */}
+              <div className="absolute inset-x-0 bottom-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                <div className="text-primary text-xs font-bold uppercase tracking-[0.2em] mb-2">{p.location}</div>
+                <h3 className="text-2xl font-black text-white uppercase leading-tight">
                   {p.name}
                 </h3>
-                <p className="text-sm text-slate-600">{p.location}</p>
+                <div className="mt-4 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500"></div>
               </div>
             </Link>
           ))}
-        </div>
-        <div className="mt-10 text-center">
-          <Link
-            href="/projects"
-            className="inline-flex rounded-lg border-2 border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
-          >
-            View All Projects
-          </Link>
         </div>
       </Container>
     </section>

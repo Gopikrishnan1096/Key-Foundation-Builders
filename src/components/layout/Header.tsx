@@ -41,17 +41,17 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md transition-colors duration-300">
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      scrolled ? "bg-black/90 border-b border-white/10 backdrop-blur-md shadow-lg" : "bg-transparent"
+    }`}>
       <div
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 ${
-          isHome
-            ? "min-h-[5.75rem] py-2 sm:min-h-[6.25rem]"
-            : "h-[4.5rem] sm:h-20"
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
+          scrolled ? "h-16 sm:h-20" : "h-20 sm:h-24"
         }`}
       >
         <Logo
           variant="header"
-          onDarkBackground={false}
+          onDarkBackground={true}
           isHome={isHome}
         />
 
@@ -62,9 +62,9 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  active ? "text-accent" : "text-slate-600"
-                } hover:text-accent`}
+                className={`text-sm font-medium transition-all hover:scale-110 ${
+                  active ? "text-primary" : "text-gray-300 hover:text-primary"
+                }`}
               >
                 {item.label}
               </Link>
@@ -75,7 +75,7 @@ export function Header() {
         <div className="hidden md:block">
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-primary shadow-md transition hover:bg-amber-400"
+            className="inline-flex items-center rounded-sm bg-primary px-6 py-2.5 text-sm font-bold text-black uppercase tracking-wider transition-all hover:bg-white hover:scale-105"
           >
             Get Quote
           </Link>
@@ -93,35 +93,34 @@ export function Header() {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 bottom-0 z-40 bg-white transition md:hidden ${
-          isHome ? "top-[5.75rem] sm:top-[6.25rem]" : "top-[4.5rem] sm:top-20"
-        } ${
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        className={`fixed inset-0 z-40 bg-black/95 transition-all duration-300 md:hidden ${
+          open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
       >
-        <nav
-          className="flex flex-col gap-1 border-t border-slate-100 px-4 py-6"
-          aria-label="Mobile"
-        >
-          {nav.map((item) => (
+        <div className="flex flex-col h-full pt-24 px-6">
+          <nav className="flex flex-col gap-6" aria-label="Mobile">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-2xl font-bold text-white hover:text-primary transition-colors"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
             <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-lg px-4 py-3 text-base font-medium text-primary hover:bg-slate-50"
+              href="/contact"
+              className="mt-8 inline-flex justify-center rounded-sm bg-primary px-6 py-4 text-center text-lg font-bold text-black uppercase"
+              onClick={() => setOpen(false)}
             >
-              {item.label}
+              Get Quote
             </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="mt-4 inline-flex justify-center rounded-lg bg-accent px-4 py-3 text-center text-base font-semibold text-primary"
-          >
-            Get Quote
-          </Link>
-          <p className="mt-6 text-center text-sm text-slate-500">{site.name}</p>
-        </nav>
+          </nav>
+        </div>
       </div>
     </header>
   );
