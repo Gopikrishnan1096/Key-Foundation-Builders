@@ -46,11 +46,7 @@ export function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
       scrolled ? "bg-white/95 border-b border-zinc-200 backdrop-blur-md shadow-sm" : "bg-transparent"
     }`}>
-      <div
-        className={`mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
-          scrolled ? "h-16 sm:h-20" : "h-20 sm:h-24"
-        }`}
-      >
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 h-20 sm:h-24">
         <Logo
           variant="header"
           onDarkBackground={onDarkBackground}
@@ -65,7 +61,11 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:text-primary ${
-                  active ? "text-primary border-b border-primary/40 pb-1" : "text-zinc-600"
+                  active
+                    ? "text-primary border-b border-primary/40 pb-1"
+                    : scrolled
+                    ? "text-zinc-600"
+                    : "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
                 }`}
               >
                 {item.label}
@@ -77,7 +77,11 @@ export function Header() {
         <div className="hidden md:block">
           <Link
             href="/contact"
-            className="group inline-flex items-center bg-primary px-8 py-3 text-[10px] font-bold text-white uppercase tracking-[0.2em] transition-all hover:bg-zinc-900"
+            className={`group inline-flex items-center px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${
+              scrolled
+                ? "bg-primary text-white hover:bg-zinc-900"
+                : "bg-white/20 backdrop-blur-sm border border-white/60 text-white hover:bg-white hover:text-zinc-900"
+            }`}
           >
             Inquire Now
           </Link>
@@ -85,7 +89,9 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-primary md:hidden"
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-lg md:hidden transition-colors ${
+            scrolled ? "text-primary" : "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
+          }`}
           /* eslint-disable-next-line jsx-a11y/aria-proptypes */
           aria-expanded={open}
           aria-controls="mobile-menu"

@@ -71,8 +71,8 @@ export function Hero() {
               idx === currentSlide ? "opacity-100 z-10 duration-1000" : "opacity-0 z-0 duration-1000"
             }`}
           >
-            {/* Bright overlay for 'bright luxury' aesthetic */}
-            <div className="absolute inset-0 bg-white/70 z-10" />
+            {/* Subtle gradient for text readability — no heavy overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/20 z-10" />
             
             <Image
               src={slide.image}
@@ -90,16 +90,16 @@ export function Hero() {
 
       <div className="container relative z-20 mx-auto px-6 text-center">
         <div className="max-w-5xl mx-auto min-h-[300px] flex flex-col justify-center">
-          <p className="text-dark font-bold tracking-[0.4em] uppercase mb-6 text-xs sm:text-sm relative z-20 transition-all">
+          <p className="text-white/80 font-bold tracking-[0.4em] uppercase mb-6 text-xs sm:text-sm relative z-20 transition-all drop-shadow-md">
             {site.tagline}
           </p>
           
           {/* Key forces re-mount and thus re-animation of text content for each slide step */}
           <div key={currentSlide} className="animate-fade-in transition-all duration-700">
-            <h1 className="text-5xl md:text-8xl font-serif text-dark leading-[1.05] mb-8 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,1)]">
+            <h1 className="text-5xl md:text-8xl font-serif text-white leading-[1.05] mb-8 tracking-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
               {slides[currentSlide].title}
             </h1>
-            <p className="mx-auto max-w-2xl text-base sm:text-lg text-zinc-900 font-medium leading-relaxed drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
+            <p className="mx-auto max-w-2xl text-base sm:text-lg text-white/85 font-medium leading-relaxed drop-shadow-md">
               {slides[currentSlide].description}
             </p>
           </div>
@@ -107,13 +107,13 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12 relative z-20">
             <Link
               href="/contact"
-              className="group relative w-full sm:w-auto overflow-hidden bg-primary text-dark px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest transition-all hover:bg-dark hover:text-white focus-ring shadow-lg"
+              className="group relative w-full sm:w-auto overflow-hidden bg-primary text-white px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest transition-all hover:bg-white hover:text-zinc-900 focus-ring shadow-lg"
             >
               Get Free Quote
             </Link>
             <Link
               href="/projects"
-              className="w-full sm:w-auto border border-dark/20 backdrop-blur-sm bg-white/30 px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest text-dark transition-all hover:bg-dark hover:text-white hover:border-dark focus-ring"
+              className="w-full sm:w-auto border border-white/60 backdrop-blur-sm bg-white/10 px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-zinc-900 focus-ring"
             >
               View Projects
             </Link>
@@ -147,7 +147,7 @@ export function Hero() {
             className={`transition-all duration-500 rounded-full ${
               idx === currentSlide
                 ? "w-8 h-2 bg-primary shadow-sm"
-                : "w-2 h-2 bg-dark/20 hover:bg-dark/40"
+                : "w-2 h-2 bg-white/40 hover:bg-white/70"
             }`}
           />
         ))}
@@ -155,8 +155,8 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <div className="hidden sm:flex absolute bottom-10 left-10 z-30 flex-col items-center gap-4">
-        <div className="w-[1px] h-20 bg-gradient-to-b from-primary to-transparent" />
-        <span className="text-[10px] text-dark/60 font-bold uppercase tracking-[0.3em] vertical-text">
+        <div className="w-[1px] h-20 bg-gradient-to-b from-white/60 to-transparent" />
+        <span className="text-[10px] text-white/60 font-bold uppercase tracking-[0.3em] vertical-text">
           Scroll
         </span>
       </div>
