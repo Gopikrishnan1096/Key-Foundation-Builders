@@ -40,10 +40,9 @@ export function Header() {
     };
   }, [open]);
 
-  // Transparent hero mode: only on home page before scrolling
-  const isTransparent = isHome && !scrolled;
-  // Logo needs white glow when sitting on the dark hero image
-  const onDarkBackground = isTransparent;
+  // User requested to "lock" the navigation bar to the solid styling everywhere
+  const isTransparent = false;
+  const onDarkBackground = false;
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
