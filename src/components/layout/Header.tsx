@@ -111,33 +111,59 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — z-[60] so it renders above the sticky header bar */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-md transition-all duration-300 md:hidden ${
-          open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-        }`}
+        aria-hidden={!open}
+        className={`fixed inset-0 z-[60] bg-white flex flex-col transition-transform duration-300 ease-in-out md:hidden ${
+          open ? "translate-x-0" : "translate-x-full"
+        } ${open ? "pointer-events-auto" : "pointer-events-none"}`}
       >
-        <div className="flex flex-col h-full pt-24 px-6">
-          <nav className="flex flex-col gap-10" aria-label="Mobile">
-            {nav.map((item) => (
+        {/* Top bar — logo + close button */}
+        <div className="flex items-center justify-between px-5 h-20 border-b border-zinc-100 shrink-0">
+          <Logo variant="header" withLink={false} />
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            className="flex items-center gap-2 text-zinc-500 hover:text-primary transition-colors"
+          >
+            <X className="h-6 w-6" />
+            <span className="text-xs font-bold uppercase tracking-widest">Close</span>
+          </button>
+        </div>
+
+        {/* Nav links */}
+        <nav className="flex flex-col px-6 pt-8 gap-1 flex-1 overflow-y-auto" aria-label="Mobile">
+          {nav.map((item) => {
+            const active = pathname === item.href;
+            return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-3xl font-serif text-zinc-900 hover:text-primary transition-colors italic"
                 onClick={() => setOpen(false)}
+                className={`flex items-center gap-3 py-4 text-2xl font-serif border-b border-zinc-100 transition-colors ${
+                  active ? "text-primary" : "text-zinc-800 hover:text-primary"
+                }`}
               >
+                {active && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                )}
                 {item.label}
               </Link>
-            ))}
-            <Link
-              href="/contact"
-              className="mt-12 inline-flex justify-center bg-primary px-6 py-5 text-center text-[10px] font-bold text-white uppercase tracking-[0.3em]"
-              onClick={() => setOpen(false)}
-            >
-              Request Consultation
-            </Link>
-          </nav>
+            );
+          })}
+        </nav>
+
+        {/* CTA at bottom */}
+        <div className="px-6 pb-10 pt-6 shrink-0">
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-center w-full bg-primary text-white py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-900 transition-colors"
+          >
+            Request Consultation
+          </Link>
         </div>
       </div>
     </header>
