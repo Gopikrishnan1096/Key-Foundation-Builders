@@ -65,13 +65,14 @@ export function Footer() {
             <div className="md:col-span-2">
               <h4 className="text-zinc-900 font-bold uppercase tracking-[0.3em] text-[10px] mb-10">Contact</h4>
               <div className="space-y-10">
-                <div className="flex gap-6">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-2">Private Line</span>
-                    <a href={`tel:${site.phoneRaw}`} className="text-zinc-900 text-lg font-serif hover:text-primary transition-colors">
-                      {site.phone}
-                    </a>
-                  </div>
+                <div className="flex flex-col gap-3">
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Phone</span>
+                  <a href={`tel:${site.phoneRaw}`} className="text-zinc-900 text-lg font-serif hover:text-primary transition-colors">
+                    {site.phone}
+                  </a>
+                  <a href={`tel:${site.phone2Raw}`} className="text-zinc-900 text-lg font-serif hover:text-primary transition-colors">
+                    {site.phone2}
+                  </a>
                 </div>
                 <div className="flex gap-6">
                   <div className="flex flex-col">

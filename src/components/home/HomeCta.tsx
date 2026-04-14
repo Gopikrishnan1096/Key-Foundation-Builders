@@ -41,7 +41,7 @@ export function HomeCta() {
               ))}
             </div>
 
-            <div className="mt-16">
+            <div className="mt-16 flex flex-col gap-4">
               <a
                 href={`tel:${site.phoneRaw}`}
                 className="group inline-flex items-center gap-6 text-zinc-900 hover:text-primary transition-all pb-4 border-b border-zinc-200"
@@ -50,8 +50,20 @@ export function HomeCta() {
                   <Phone className="h-4 w-4" aria-hidden />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Private Line</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Call Us</span>
                   <span className="text-2xl font-serif">{site.phone}</span>
+                </div>
+              </a>
+              <a
+                href={`tel:${site.phone2Raw}`}
+                className="group inline-flex items-center gap-6 text-zinc-900 hover:text-primary transition-all pb-4 border-b border-zinc-200"
+              >
+                <div className="flex h-12 w-12 items-center justify-center bg-slate-50 border border-zinc-200 group-hover:bg-primary group-hover:text-white transition-all">
+                  <Phone className="h-4 w-4" aria-hidden />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">WhatsApp</span>
+                  <span className="text-2xl font-serif">{site.phone2}</span>
                 </div>
               </a>
             </div>

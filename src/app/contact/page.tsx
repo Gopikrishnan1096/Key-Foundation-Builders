@@ -39,10 +39,16 @@ export default function ContactPage() {
                 <Phone className="h-5 w-5" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-2">Private Line</span>
+                <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-2">Call Us</span>
                 <a href={`tel:${site.phoneRaw}`} className="text-zinc-900 font-serif text-xl hover:text-primary transition-colors">
                   {site.phone}
                 </a>
+                <a href={`tel:${site.phone2Raw}`} className="text-zinc-900 font-serif text-xl hover:text-primary transition-colors mt-1">
+                  {site.phone2}
+                </a>
+                <span className="text-[10px] text-green-600 font-bold uppercase tracking-widest mt-2">
+                  ✓ WhatsApp: {site.phone2}
+                </span>
               </div>
             </div>
             <div className="flex flex-col gap-6">

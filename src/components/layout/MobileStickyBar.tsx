@@ -12,13 +12,23 @@ export function MobileStickyBar() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(15,23,42,0.08)] md:hidden">
       <div className="mx-auto flex max-w-lg items-stretch justify-between gap-1 px-2 py-2">
+        {/* Call number 1 */}
         <a
           href={`tel:${site.phoneRaw}`}
           className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
         >
           <Phone className="h-5 w-5 text-accent" aria-hidden />
-          <span className="text-xs font-semibold">Call</span>
+          <span className="text-[10px] font-semibold leading-tight">{site.phone}</span>
         </a>
+        {/* Call number 2 */}
+        <a
+          href={`tel:${site.phone2Raw}`}
+          className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
+        >
+          <Phone className="h-5 w-5 text-primary" aria-hidden />
+          <span className="text-[10px] font-semibold leading-tight">{site.phone2}</span>
+        </a>
+        {/* WhatsApp */}
         <a
           href={wa}
           target="_blank"
@@ -26,14 +36,15 @@ export function MobileStickyBar() {
           className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
         >
           <MessageCircle className="h-5 w-5 text-green-600" aria-hidden />
-          <span className="text-xs font-semibold">WhatsApp</span>
+          <span className="text-[10px] font-semibold leading-tight">WhatsApp</span>
         </a>
+        {/* Get Quote */}
         <Link
           href="/contact"
           className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
         >
           <FileText className="h-5 w-5 text-accent" aria-hidden />
-          <span className="text-xs font-semibold">Get Quote</span>
+          <span className="text-[10px] font-semibold leading-tight">Get Quote</span>
         </Link>
       </div>
     </div>
