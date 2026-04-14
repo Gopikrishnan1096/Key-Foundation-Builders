@@ -11,7 +11,7 @@ const slides = [
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2400",
     title: (
       <>
-        Building Kerala's <span className="italic text-primary">Strongest</span>{" "}
+        Building Kerala&apos;s <span className="italic text-primary">Strongest</span>{" "}
         Foundations <br className="hidden sm:block" /> Since {site.founded}
       </>
     ),
