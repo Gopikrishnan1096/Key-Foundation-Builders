@@ -32,7 +32,7 @@ export function Logo({
 
   const headerImgClass =
     isHome && isHeader
-      ? `h-20 w-auto max-w-[10rem] object-contain object-left sm:h-[5.5rem] sm:max-w-[12rem] md:h-[6rem] md:max-w-[14rem] ${
+      ? `w-[54.51px] h-[64px] object-contain object-left ${
           onDarkBackground ? darkHeroFilter : ""
         }`
       : isHeader
