@@ -23,9 +23,10 @@ const config: Config = {
         dark: "#152257",
       },
       fontFamily: {
-        // Headings and body are both sans-serif (industrial, modern)
+        // Roboto (body) + Roboto Slab (headings) pairing
         sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
-        heading: ["var(--font-heading)", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "ui-serif", "Georgia", "serif"],
+        serif: ["var(--font-heading)", "ui-serif", "Georgia", "serif"],
       },
     },
   },

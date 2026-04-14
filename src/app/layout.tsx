@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Roboto, Roboto_Slab } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Main } from "@/components/layout/Main";
@@ -8,17 +8,18 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { site } from "@/lib/site";
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
+  weight: ["300", "400", "500", "700"],
 });
 
-const heading = Montserrat({
+const heading = Roboto_Slab({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -73,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${heading.variable}`}>
+    <html lang="en" className={`${roboto.variable} ${heading.variable}`}>
       <body className="min-h-screen font-sans pb-mobile-bar md:pb-0">
         <a
           href="#main-content"

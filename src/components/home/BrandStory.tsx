@@ -9,7 +9,7 @@ export function BrandStory() {
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           <div className="relative aspect-square overflow-hidden group">
             <Image
-              src="https://images.unsplash.com/photo-1503387762-592be585d5f8?auto=format&fit=crop&q=80&w=1000"
+              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=1000"
               alt="Architectural details"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
