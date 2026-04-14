@@ -13,8 +13,8 @@ type Props = {
 };
 
 const imgSize = {
-  header: { width: 1024, height: 1024 },
-  footer: { width: 1024, height: 1024 },
+  header: { width: 581, height: 682 },
+  footer: { width: 581, height: 682 },
 } as const;
 
 export function Logo({
