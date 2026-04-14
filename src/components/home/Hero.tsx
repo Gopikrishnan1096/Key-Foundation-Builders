@@ -2,48 +2,118 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { site } from "@/lib/site";
 
+const slides = [
+  {
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=2400",
+    title: (
+      <>
+        Building Kerala’s <span className="italic text-primary">Strongest</span>{" "}
+        Foundations <br className="hidden sm:block" /> Since {site.founded}
+      </>
+    ),
+    description:
+      "Residential, commercial, and steel structure projects delivered with disciplined engineering, quality materials, and on-time execution across Kerala.",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=2400",
+    title: (
+      <>
+        Luxury <span className="italic text-primary">Residential</span>{" "}
+        Excellence
+      </>
+    ),
+    description:
+      "Crafting bespoke luxury villas and premium residential spaces that blend modern aesthetics with timeless comfort and superior structural integrity.",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1541888081604-582772594411?auto=format&fit=crop&q=80&w=2400",
+    title: (
+      <>
+        Innovative <span className="italic text-primary">Commercial</span>{" "}
+        Hubs
+      </>
+    ),
+    description:
+      "Building state-of-the-art commercial complexes, offices, and retail spaces designed to elevate business and define modern Kerala.",
+  },
+];
+
 export function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto-advance
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000); // 6s per slide
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-slate-50 overflow-hidden">
-      {/* Cinematic Background */}
+    <section className="relative min-h-screen flex items-center justify-center bg-slate-50 overflow-hidden group">
+      {/* Sliding Cinematic Backgrounds */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-white/65 z-10" />
-        <Image
-          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=2400"
-          alt="Construction site"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        {slides.map((slide, idx) => (
+          <div
+            key={slide.image}
+            className={`absolute inset-0 transition-opacity durationSingular ease-in-out ${
+              idx === currentSlide ? "opacity-100 z-10 duration-1000" : "opacity-0 z-0 duration-1000"
+            }`}
+          >
+            {/* Bright overlay for 'bright luxury' aesthetic */}
+            <div className="absolute inset-0 bg-white/70 z-10" />
+            
+            <Image
+              src={slide.image}
+              alt={`Slide ${idx + 1}`}
+              fill
+              priority={idx === 0}
+              sizes="100vw"
+              className={`object-cover transition-transform duration-[10000ms] ease-linear ${
+                idx === currentSlide ? "scale-105" : "scale-100"
+              }`}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="container relative z-20 mx-auto px-6 text-center">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-dark font-bold tracking-[0.4em] uppercase mb-6 text-xs sm:text-sm animate-fade-in">
+        <div className="max-w-5xl mx-auto min-h-[300px] flex flex-col justify-center">
+          <p className="text-dark font-bold tracking-[0.4em] uppercase mb-6 text-xs sm:text-sm relative z-20 transition-all">
             {site.tagline}
           </p>
-          <h1 className="text-5xl md:text-8xl font-serif text-dark leading-[1.05] mb-8 tracking-tight">
-            Building Kerala’s <span className="italic text-primary">Strongest</span>{" "}
-            Foundations <br className="hidden sm:block" /> Since {site.founded}
-          </h1>
-          <p className="mx-auto max-w-2xl text-base sm:text-lg text-zinc-700 leading-relaxed">
-            Residential, commercial, and steel structure projects delivered with disciplined engineering,
-            quality materials, and on-time execution across Kerala.
-          </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
+          {/* Key forces re-mount and thus re-animation of text content for each slide step */}
+          <div key={currentSlide} className="animate-fade-in transition-all duration-700">
+            <h1 className="text-5xl md:text-8xl font-serif text-dark leading-[1.05] mb-8 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,1)]">
+              {slides[currentSlide].title}
+            </h1>
+            <p className="mx-auto max-w-2xl text-base sm:text-lg text-zinc-900 font-medium leading-relaxed drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
+              {slides[currentSlide].description}
+            </p>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12 relative z-20">
             <Link
               href="/contact"
-              className="group relative w-full sm:w-auto overflow-hidden bg-primary text-dark px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest transition-all hover:bg-dark hover:text-white focus-ring"
+              className="group relative w-full sm:w-auto overflow-hidden bg-primary text-dark px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest transition-all hover:bg-dark hover:text-white focus-ring shadow-lg"
             >
               Get Free Quote
             </Link>
             <Link
               href="/projects"
-              className="w-full sm:w-auto border border-dark/20 backdrop-blur-sm px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest text-dark transition-all hover:bg-dark hover:text-white focus-ring"
+              className="w-full sm:w-auto border border-dark/20 backdrop-blur-sm bg-white/30 px-12 py-5 rounded-sm text-sm font-bold uppercase tracking-widest text-dark transition-all hover:bg-dark hover:text-white hover:border-dark focus-ring"
             >
               View Projects
             </Link>
@@ -51,8 +121,40 @@ export function Hero() {
         </div>
       </div>
 
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 text-dark/40 hover:text-dark hover:bg-white/50 backdrop-blur-sm rounded-full transition-all opacity-0 group-hover:opacity-100 hidden sm:block"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 text-dark/40 hover:text-dark hover:bg-white/50 backdrop-blur-sm rounded-full transition-all opacity-0 group-hover:opacity-100 hidden sm:block"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10" />
+      </button>
+
+      {/* Slider Indicators */}
+      <div className="absolute bottom-24 sm:bottom-12 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => goToSlide(idx)}
+            aria-label={`Go to slide ${idx + 1}`}
+            className={`transition-all duration-500 rounded-full ${
+              idx === currentSlide
+                ? "w-8 h-2 bg-primary shadow-sm"
+                : "w-2 h-2 bg-dark/20 hover:bg-dark/40"
+            }`}
+          />
+        ))}
+      </div>
+
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+      <div className="hidden sm:flex absolute bottom-10 left-10 z-30 flex-col items-center gap-4">
         <div className="w-[1px] h-20 bg-gradient-to-b from-primary to-transparent" />
         <span className="text-[10px] text-dark/60 font-bold uppercase tracking-[0.3em] vertical-text">
           Scroll
