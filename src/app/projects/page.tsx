@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="bg-black min-h-screen pt-32 md:pt-40">
+    <div className="bg-[var(--tw-ring-offset-color)] min-h-screen pt-32 md:pt-40">
       <div className="container mx-auto px-6 py-20">
         <div className="text-center mb-24 max-w-2xl mx-auto">
           <p className="text-primary font-bold tracking-[0.4em] uppercase mb-6 text-xs text-center">Our Portfolio</p>

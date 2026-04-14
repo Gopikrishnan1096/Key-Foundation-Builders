@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Main } from "@/components/layout/Main";
@@ -8,16 +8,17 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { site } from "@/lib/site";
 
-const playfair = Playfair_Display({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-body",
   display: "swap",
 });
 
-const inter = Inter({
+const heading = Montserrat({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-heading",
   display: "swap",
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Key Foundation Builders — trusted construction company in Kerala. 10+ years building homes, commercial spaces & warehouses in Kochi, Thrissur, Kozhikode & across Kerala. Get a free quote today.",
+    "Key Foundation Builders — trusted civil & steel construction company in Kerala. Building homes, commercial spaces, steel structures & godowns since 1995. Get a free quote today.",
   keywords: [...site.keywords],
   authors: [{ name: site.name, url: site.siteUrl }],
   creator: site.name,
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} | Best Construction Company in Kerala`,
     description:
-      "10+ years of trusted construction in Kerala. Homes, commercial buildings & warehouses. Serving Kochi, Thrissur, Kozhikode & all of Kerala.",
+      "Trusted civil & steel construction in Kerala since 1995. Homes, commercial buildings, steel structures & godowns. Serving Kochi, Thrissur, Kozhikode & all of Kerala.",
     images: [
       {
         url: "/logo.png",
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} | Construction Company Kerala`,
     description:
-      "Trusted builders in Kerala — homes, commercial & warehouse construction. 10+ years, 50+ projects. Call +91 95266 82306.",
+      "Trusted builders in Kerala since 1995 — homes, commercial, steel & godown construction. Call +91 96457 67050.",
     images: ["/logo.png"],
   },
   alternates: {
@@ -72,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${inter.variable} ${heading.variable}`}>
       <body className="min-h-screen font-sans pb-mobile-bar md:pb-0">
         <a
           href="#main-content"

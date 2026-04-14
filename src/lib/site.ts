@@ -1,8 +1,8 @@
 export const site = {
   name: "Key Foundation Builders",
-  tagline: "Trusted Construction Experts in Kerala",
+  tagline: "Trusted Civil & Steel Construction Experts",
   siteUrl: "https://www.keyfoundation.in",
-  founded: 2014,
+  founded: 1995,
   phone: "+91 96457 67050",
   phoneRaw: "919645767050",
   whatsapp: "+91 96457 67050",
@@ -32,6 +32,7 @@ export const site = {
     "home builders Kerala",
     "commercial construction Kerala",
     "warehouse construction Kerala",
+    "steel structure work Kerala",
     "best builders in Kerala",
     "construction company Thrissur",
     "residential construction Kerala",

@@ -1,19 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Home, Building2, MapPin, Award } from "lucide-react";
+import { Building2, Headset, Smile, BadgeCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
 const items = [
-  { icon: Home, value: 100, suffix: "+", label: "Homes Built" },
-  { icon: Building2, value: 50, suffix: "+", label: "Projects Completed" },
-  { icon: Award, value: 10, suffix: "+", label: "Years Experience" },
-  {
-    icon: MapPin,
-    kind: "text" as const,
-    main: "Kerala",
-    label: "Serving Kerala Region",
-  },
+  { icon: BadgeCheck, value: 30, suffix: "+", label: "Years Experience" },
+  { icon: Building2, value: 100, suffix: "+", label: "Projects Completed" },
+  { icon: Smile, value: 500, suffix: "+", label: "Happy Clients" },
+  { icon: Headset, kind: "text" as const, main: "24/7", label: "Support" },
 ];
 
 function useCountUp(target: number, active: boolean, duration = 1400) {
@@ -44,14 +39,14 @@ function useCountUp(target: number, active: boolean, duration = 1400) {
 
 type StatDef =
   | {
-      icon: typeof Home;
+      icon: typeof Building2;
       value: number;
       suffix: string;
       label: string;
       kind?: "count";
     }
   | {
-      icon: typeof MapPin;
+      icon: typeof Headset;
       kind: "text";
       main: string;
       label: string;

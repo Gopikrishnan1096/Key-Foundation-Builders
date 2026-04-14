@@ -5,13 +5,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const features = [
   {
     icon: BadgeCheck,
-    title: "10+ Years of Excellence",
-    desc: "A decade of construction expertise building homes and commercial projects across Kerala.",
+    title: "30+ Years of Excellence",
+    desc: "Three decades of trusted civil & steel construction across Kerala.",
   },
   {
     icon: CheckCircle2,
-    title: "50+ Projects Completed",
-    desc: "From compact homes to 7,000 sqft warehouses — a proven track record you can trust.",
+    title: "100+ Projects Completed",
+    desc: "From homes to commercial builds and steel/godown projects — a proven track record you can trust.",
   },
   {
     icon: CreditCard,
@@ -20,8 +20,8 @@ const features = [
   },
   {
     icon: Package,
-    title: "ISI-Certified Materials",
-    desc: "We source only quality, ISI-certified building materials for strength and durability.",
+    title: "Quality Materials",
+    desc: "We specify reliable brands and quality grades for long-term strength and durability.",
   },
   {
     icon: Clock,

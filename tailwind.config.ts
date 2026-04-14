@@ -9,15 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#F59E0B", // Bright Amber
-        secondary: "#FFFFFF", // Bright White
-        accent: "#B87333", // Copper accent
-        dark: "#121212", // Deep Grey/Black
-        light: "#F8FAFC", // Bright slate
+        // Palette from provided Pantone reference image
+        navy: "#152257", // Pantone 281 XGC (approx)
+        sky: "#7CA5DB", // Pantone 659 C (approx)
+        purple: "#681F78", // Pantone 2613 C (approx)
+        magenta: "#C80180", // Pantone 233 C (approx)
+        orangeade: "#E2572E", // Pantone 17-1461 TCX Orangeade (approx)
+
+        // Backward-compatible tokens used across the app
+        primary: "#E2572E",
+        secondary: "#7CA5DB",
+        accent: "#C80180",
+        dark: "#152257",
       },
       fontFamily: {
-        serif: ["var(--font-playfair)", "serif"],
-        sans: ["var(--font-inter)", "sans-serif"],
+        // Headings and body are both sans-serif (industrial, modern)
+        sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
     },
   },

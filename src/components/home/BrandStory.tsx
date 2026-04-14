@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import Image from "next/image";
+import { site } from "@/lib/site";
 
 export function BrandStory() {
   return (
@@ -21,29 +22,28 @@ export function BrandStory() {
             <div>
               <p className="text-primary font-bold tracking-[0.4em] uppercase text-xs mb-4">Our Legacy</p>
               <h2 className="text-4xl md:text-6xl font-serif text-zinc-900 leading-tight">
-                A Passion for <br />
-                <span className="italic text-primary">Perfection</span>
+                Built on <br />
+                <span className="italic text-primary">Strong Foundations</span>
               </h2>
             </div>
             
             <p className="text-zinc-600 text-lg leading-relaxed">
-              At Key Foundation Builders, we believe that true luxury lies in the details. 
-              Since our inception in 2014, we have dedicated ourselves to redefining the 
-              architectural landscape of Kerala through uncompromising quality and 
-              backward-integrated engineering.
+              At Key Foundation Builders, we believe strength, safety, and trust are non‑negotiable.
+              Since {site.founded}, we’ve delivered civil and steel construction projects across Kerala
+              with disciplined engineering, quality materials, and transparent execution.
             </p>
             
             <div className="grid gap-8 sm:grid-cols-2 pt-8 border-t border-zinc-200">
               <div>
                 <h4 className="text-primary font-bold uppercase tracking-widest text-xs mb-2">The Vision</h4>
                 <p className="text-sm text-zinc-500 leading-relaxed">
-                  To create landmarks that stand the test of time, combining traditional integrity with modern innovation.
+                  To build Kerala’s most dependable structures — engineered for durability and delivered with integrity.
                 </p>
               </div>
               <div>
                 <h4 className="text-primary font-bold uppercase tracking-widest text-xs mb-2">The Mission</h4>
                 <p className="text-sm text-zinc-500 leading-relaxed">
-                  To provide a seamless, transparent, and high-fidelity construction experience for every client.
+                  To provide end‑to‑end civil and steel construction with predictable timelines, quality control, and clear BOQs.
                 </p>
               </div>
             </div>
@@ -51,13 +51,13 @@ export function BrandStory() {
             <div className="pt-8">
               <div className="flex items-center gap-6">
                 <div>
-                  <div className="text-4xl font-serif text-zinc-900">10+</div>
+                  <div className="text-4xl font-serif text-zinc-900">30+</div>
                   <div className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] mt-1 font-bold">Years of Trust</div>
                 </div>
                 <div className="w-[1px] h-12 bg-zinc-200" />
                 <div>
-                  <div className="text-4xl font-serif text-zinc-900">50+</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] mt-1 font-bold">Landmarks Built</div>
+                  <div className="text-4xl font-serif text-zinc-900">100+</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] mt-1 font-bold">Projects Completed</div>
                 </div>
               </div>
             </div>

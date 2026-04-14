@@ -16,7 +16,7 @@ export function ServicesPreview() {
         </div>
 
         <div className="grid gap-1 bg-zinc-200">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-1">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-1">
             {servicePreviews.map((s) => (
               <Link
                 key={s.id}
@@ -37,7 +37,7 @@ export function ServicesPreview() {
                 </p>
 
                 <div className="mt-12 flex items-center gap-4 text-primary text-[10px] font-bold uppercase tracking-[0.2em] transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  Services <div className="h-[1px] w-8 bg-primary" />
+                  View Details <div className="h-[1px] w-8 bg-primary" />
                 </div>
               </Link>
             ))}
