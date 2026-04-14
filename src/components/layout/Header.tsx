@@ -21,8 +21,6 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   const isHome = pathname === "/";
-  // Home hero has a light overlay, so treat as light background.
-  const onDarkBackground = false;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -44,6 +42,8 @@ export function Header() {
 
   // Transparent hero mode: only on home page before scrolling
   const isTransparent = isHome && !scrolled;
+  // Logo needs white glow when sitting on the dark hero image
+  const onDarkBackground = isTransparent;
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${

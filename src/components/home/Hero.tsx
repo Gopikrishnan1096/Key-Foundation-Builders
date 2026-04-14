@@ -8,10 +8,10 @@ import { site } from "@/lib/site";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=2400",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2400",
     title: (
       <>
-        Building Kerala’s <span className="italic text-primary">Strongest</span>{" "}
+        Building Kerala's <span className="italic text-primary">Strongest</span>{" "}
         Foundations <br className="hidden sm:block" /> Since {site.founded}
       </>
     ),
@@ -30,7 +30,7 @@ const slides = [
       "Crafting bespoke luxury villas and premium residential spaces that blend modern aesthetics with timeless comfort and superior structural integrity.",
   },
   {
-    image: "https://images.unsplash.com/photo-1541888081604-582772594411?auto=format&fit=crop&q=80&w=2400",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&q=80&w=2400",
     title: (
       <>
         Innovative <span className="italic text-primary">Commercial</span>{" "}
@@ -124,14 +124,14 @@ export function Hero() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 text-dark/40 hover:text-dark hover:bg-white/50 backdrop-blur-sm rounded-full transition-all opacity-0 group-hover:opacity-100 hidden sm:block"
+        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 text-white/70 hover:text-white hover:bg-white/20 backdrop-blur-sm rounded-full transition-all opacity-0 group-hover:opacity-100 hidden sm:flex items-center justify-center"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 text-dark/40 hover:text-dark hover:bg-white/50 backdrop-blur-sm rounded-full transition-all opacity-0 group-hover:opacity-100 hidden sm:block"
+        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 text-white/70 hover:text-white hover:bg-white/20 backdrop-blur-sm rounded-full transition-all opacity-0 group-hover:opacity-100 hidden sm:flex items-center justify-center"
         aria-label="Next slide"
       >
         <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10" />
