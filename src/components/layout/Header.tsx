@@ -96,18 +96,14 @@ export function Header() {
 
         <button
           type="button"
-          className={`inline-flex h-10 w-10 items-center justify-center rounded-lg md:hidden transition-colors ${
-            isTransparent
-              ? "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
-              : "text-primary"
-          }`}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-md text-primary md:hidden transition-all hover:bg-primary hover:text-white active:scale-95"
           /* eslint-disable-next-line jsx-a11y/aria-proptypes */
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
