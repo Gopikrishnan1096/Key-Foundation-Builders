@@ -137,8 +137,26 @@ export function Hero() {
         <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10" />
       </button>
 
+      {/* Mobile Quick-Nav Links */}
+      <div className="sm:hidden absolute bottom-6 left-0 right-0 z-30 flex justify-center gap-2 px-4">
+        {[
+          { href: "/services", label: "Services" },
+          { href: "/about", label: "About" },
+          { href: "/projects", label: "Projects" },
+          { href: "/contact", label: "Contact" },
+        ].map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="flex-1 text-center py-2 px-1 text-[10px] font-bold uppercase tracking-widest text-white bg-white/15 backdrop-blur-sm border border-white/30 rounded-sm hover:bg-primary hover:border-primary transition-all"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+
       {/* Slider Indicators */}
-      <div className="absolute bottom-24 sm:bottom-12 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+      <div className="absolute bottom-20 sm:bottom-12 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
         {slides.map((_, idx) => (
           <button
             key={idx}

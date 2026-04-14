@@ -15,18 +15,20 @@ export function MobileStickyBar() {
         {/* Call number 1 */}
         <a
           href={`tel:${site.phoneRaw}`}
+          aria-label={`Call ${site.phone}`}
           className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
         >
-          <Phone className="h-5 w-5 text-accent" aria-hidden />
-          <span className="text-[10px] font-semibold leading-tight">{site.phone}</span>
+          <Phone className="h-6 w-6 text-accent" aria-hidden />
+          <span className="text-[9px] font-semibold leading-tight text-zinc-500">Call 1</span>
         </a>
         {/* Call number 2 */}
         <a
           href={`tel:${site.phone2Raw}`}
+          aria-label={`Call ${site.phone2}`}
           className="flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-2 text-primary transition hover:bg-slate-50"
         >
-          <Phone className="h-5 w-5 text-primary" aria-hidden />
-          <span className="text-[10px] font-semibold leading-tight">{site.phone2}</span>
+          <Phone className="h-6 w-6 text-primary" aria-hidden />
+          <span className="text-[9px] font-semibold leading-tight text-zinc-500">Call 2</span>
         </a>
         {/* WhatsApp */}
         <a
