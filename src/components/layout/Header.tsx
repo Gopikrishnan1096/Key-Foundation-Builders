@@ -94,9 +94,9 @@ export function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
       isTransparent ? "bg-transparent" : "bg-[#0A0A0A] border-b border-white/5"
     }`}>
-      {/* ── Utility bar (top) ── */}
-      <div className={`hidden lg:flex justify-end items-center px-8 h-8 border-b gap-8 transition-all duration-500 ${
-        isTransparent ? "border-white/10" : "border-white/5"
+      {/* ── Utility bar (top) — hidden on hero, shown on scrolled ── */}
+      <div className={`hidden lg:flex justify-end items-center px-8 gap-8 transition-all duration-500 border-b overflow-hidden ${
+        isTransparent ? "h-0 opacity-0 pointer-events-none border-transparent" : "h-8 opacity-100 border-white/5"
       }`}>
         {utilityLinks.map((l) => (
           <Link
@@ -110,33 +110,68 @@ export function Header() {
       </div>
 
       {/* ── Main nav bar ── */}
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-20">
-        {/* Logo */}
-        <Logo variant="header" onDarkBackground={true} isHome={isHome} />
+      {isTransparent ? (
+        /* ── HERO STATE: Centered logo, 'MENU' hamburger left ── */
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-24">
+          
+          {/* Left: MENU button */}
+          <div className="flex-1 flex items-center">
+            <button
+              type="button"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMobileOpen((v) => !v)}
+              className="group flex items-center gap-4 text-white transition-opacity hover:opacity-80"
+            >
+              <span className="text-[12px] font-bold tracking-[0.15em] uppercase hidden sm:block">
+                MENU
+              </span>
+              <div className="flex flex-col gap-[5px] items-start justify-center w-6">
+                <span className="h-[1px] bg-white w-full transition-all duration-300 group-hover:w-4" />
+                <span className="h-[1px] bg-white w-5 transition-all duration-300 group-hover:w-full" />
+                <span className="h-[1px] bg-white w-4 transition-all duration-300 group-hover:w-5" />
+              </div>
+            </button>
+          </div>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-10" aria-label="Main">
-          {megaNav.map((item) => {
-            const hasItems = item.items.length > 0;
-            const isActive = pathname === item.href || pathname.startsWith(item.href + "?");
-            return (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => hasItems && openMenu(item.label)}
-                onMouseLeave={closeMenu}
-              >
-                <Link
-                  href={item.href}
-                  className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors ${
-                    isActive ? "text-[#C9A96E]" : "text-white/80 hover:text-white"
-                  }`}
+          {/* CENTERED LOGO */}
+          <div className="flex justify-center flex-shrink-0">
+            <Logo variant="header" onDarkBackground={true} isHome={isHome} />
+          </div>
+
+          {/* Right: spacer to keep logo perfectly centered */}
+          <div className="flex-1" />
+        </div>
+      ) : (
+        /* ── SCROLLED STATE: Normal left-aligned logo ── */
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-20">
+          {/* Logo */}
+          <Logo variant="header" onDarkBackground={true} isHome={isHome} />
+
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-10" aria-label="Main">
+            {megaNav.map((item) => {
+              const hasItems = item.items.length > 0;
+              const isActive = pathname === item.href || pathname.startsWith(item.href + "?");
+              return (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => hasItems && openMenu(item.label)}
+                  onMouseLeave={closeMenu}
                 >
-                  {item.label}
-                  {hasItems && (
-                    <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeMenu === item.label ? "rotate-180" : ""}`} />
-                  )}
-                </Link>
+                  <Link
+                    href={item.href}
+                    className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors ${
+                      isActive ? "text-[#C9A96E]" : "text-white/80 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                    {hasItems && (
+                      <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeMenu === item.label ? "rotate-180" : ""}`} />
+                    )}
+                  </Link>
 
                 {/* Mega dropdown */}
                 {hasItems && (
@@ -173,28 +208,29 @@ export function Header() {
           })}
         </nav>
 
-        {/* CTA */}
-        <div className="hidden lg:block">
-          <Link
-            href="/contact"
-            className="inline-flex items-center px-7 py-3 text-[11px] font-bold tracking-[0.15em] uppercase border border-white/40 text-white hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all duration-300"
-          >
-            INQUIRE NOW
-          </Link>
-        </div>
+          {/* CTA */}
+          <div className="hidden lg:block">
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-7 py-3 text-[11px] font-bold tracking-[0.15em] uppercase border border-white/40 text-white hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all duration-300"
+            >
+              INQUIRE NOW
+            </Link>
+          </div>
 
-        {/* Mobile hamburger */}
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center text-white lg:hidden"
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMobileOpen((v) => !v)}
-        >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </div>
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center text-white lg:hidden"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      )}
 
       {/* ── Mobile full-screen overlay menu ── */}
       <div

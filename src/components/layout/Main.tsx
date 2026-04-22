@@ -3,7 +3,10 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-/** Matches `Header` row height so content clears the fixed bar. */
+/** 
+ * Hero page gets no top padding — the fixed transparent header floats over
+ * the full-screen hero. Non-home pages get padding to clear the fixed black bar.
+ */
 export function Main({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -11,11 +14,7 @@ export function Main({ children }: { children: ReactNode }) {
   return (
     <main
       id="main-content"
-      className={
-        isHome
-          ? "pt-[5.75rem] sm:pt-[6.25rem]"
-          : "pt-[4.5rem] sm:pt-20"
-      }
+      className={isHome ? "" : "pt-[4.5rem] sm:pt-20"}
     >
       {children}
     </main>
