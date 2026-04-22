@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, User, Phone, ChevronDown, Send } from "lucide-react";
+import { MessageCircle, User, Phone, ChevronDown, Send, MapPin } from "lucide-react";
 import { site } from "@/lib/site";
 
 const projectTypes = [
@@ -18,7 +18,6 @@ export function QuickEnquiryForm() {
   const [phone, setPhone] = useState("");
   const [location, setLocation] = useState("");
   const [projectType, setProjectType] = useState("");
-  const [budget, setBudget] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
@@ -30,113 +29,147 @@ export function QuickEnquiryForm() {
       `📞 *Phone:* ${phone || "–"}`,
       `📍 *Location:* ${location || "–"}`,
       `🏗️ *Project:* ${projectType || "–"}`,
-      `💰 *Budget:* ${budget || "–"}`,
       `--------------------------`,
       `Please contact this lead ASAP.`,
     ].join("\n");
 
-    const waUrl = `https://wa.me/919645767050?text=${encodeURIComponent(msg)}`;
+    const waUrl = `https://wa.me/${site.whatsappRaw}?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   }
 
   return (
-    <div className="w-full bg-white/50 p-8 md:p-10 border border-zinc-200 backdrop-blur-3xl">
-      <div className="mb-10">
-        <h3 className="text-2xl font-serif text-zinc-900 italic">Signature Inquiry</h3>
-        <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.2em] mt-2">Personalized Consultation</p>
+    <form onSubmit={handleSubmit} className="space-y-8">
+      {/* Name */}
+      <FloatingInput
+        id="enquiry-name"
+        label="Full Name"
+        type="text"
+        required
+        value={name}
+        onChange={setName}
+        icon={<User className="h-4 w-4" />}
+      />
+
+      <div className="grid grid-cols-2 gap-6">
+        {/* Phone */}
+        <FloatingInput
+          id="enquiry-phone"
+          label="Phone"
+          type="tel"
+          required
+          value={phone}
+          onChange={setPhone}
+          icon={<Phone className="h-4 w-4" />}
+        />
+        {/* Location */}
+        <FloatingInput
+          id="enquiry-location"
+          label="Location"
+          type="text"
+          required
+          value={location}
+          onChange={setLocation}
+          icon={<MapPin className="h-4 w-4" />}
+        />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Name */}
-        <div className="space-y-2">
-          <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Full Identity</label>
-          <div className="relative">
-            <User className="absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
-            <input
-              required
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full border-b border-zinc-200 bg-transparent py-4 pl-8 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8">
-          {/* Phone */}
-          <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Contact Number</label>
-            <div className="relative">
-              <Phone className="absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
-              <input
-                required
-                type="tel"
-                placeholder="Phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full border-b border-zinc-200 bg-transparent py-4 pl-8 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
-              />
-            </div>
-          </div>
-          {/* Location */}
-          <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Desired Location</label>
-            <input
-              required
-              type="text"
-              placeholder="E.g. Kochi"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full border-b border-zinc-200 bg-transparent py-4 text-sm text-zinc-900 outline-none transition-all focus:border-primary placeholder:text-zinc-400"
-            />
-          </div>
-        </div>
-
-        {/* Project Type */}
-        <div className="space-y-2">
-          <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Architectural Interest</label>
-          <div className="relative">
-            <ChevronDown className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
-            <select
-              aria-label="Project Type"
-              required
-              value={projectType}
-              onChange={(e) => setProjectType(e.target.value)}
-              className="w-full appearance-none border-b border-zinc-200 bg-transparent py-4 text-sm text-zinc-900 outline-none transition-all focus:border-primary"
-            >
-              <option value="" className="bg-white">Select Project Type</option>
-              {projectTypes.map((t) => (
-                <option key={t} value={t} className="bg-white">
-                  {t}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Submit */}
-        <button
-          type="submit"
-          disabled={submitted}
-          className={`group mt-8 flex w-full items-center justify-center gap-4 py-5 text-[10px] font-bold uppercase tracking-[0.3em] transition-all ${
-            submitted
-              ? "bg-green-600 text-white"
-              : "bg-primary text-white hover:bg-zinc-900"
-          }`}
+      {/* Project Type */}
+      <div className="relative group">
+        <ChevronDown className="pointer-events-none absolute right-0 bottom-4 h-4 w-4 text-[#999]" />
+        <select
+          aria-label="Project Type"
+          required
+          value={projectType}
+          onChange={(e) => setProjectType(e.target.value)}
+          className="w-full appearance-none bg-transparent border-b border-zinc-300 py-4 pr-8 text-sm text-[#1A1A1A] outline-none transition-colors focus:border-[#C9A96E] text-[#666]"
         >
-          {submitted ? (
-            <>✓ Dispatched</>
-          ) : (
-            <>
-              Request Presentation
-              <Send className="h-3 w-3 transition-transform group-hover:translate-x-1" />
-            </>
-          )}
-        </button>
-      </form>
+          <option value="">Select Project Type</option>
+          {projectTypes.map((t) => (
+            <option key={t} value={t} className="bg-white">
+              {t}
+            </option>
+          ))}
+        </select>
+        <div className="h-[1px] w-0 bg-[#C9A96E] absolute bottom-0 left-0 transition-all duration-300 group-focus-within:w-full" />
+      </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={submitted}
+        className={`group mt-6 flex w-full items-center justify-center gap-4 py-5 text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-300 ${
+          submitted
+            ? "bg-green-700 text-white"
+            : "bg-[#0A0A0A] text-white hover:bg-[#C9A96E] hover:text-[#0A0A0A]"
+        }`}
+      >
+        {submitted ? (
+          <>✓ Message Dispatched</>
+        ) : (
+          <>
+            Send Enquiry
+            <Send className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          </>
+        )}
+      </button>
+    </form>
+  );
+}
+
+// ── Floating label input ─────────────────────────────────────────────────────
+function FloatingInput({
+  id,
+  label,
+  type,
+  required,
+  value,
+  onChange,
+  icon,
+}: {
+  id: string;
+  label: string;
+  type: string;
+  required?: boolean;
+  value: string;
+  onChange: (v: string) => void;
+  icon?: React.ReactNode;
+}) {
+  const [focused, setFocused] = useState(false);
+  const lifted = focused || !!value;
+
+  return (
+    <div className="relative group">
+      {/* Floating label */}
+      <label
+        htmlFor={id}
+        className={`absolute left-0 transition-all duration-200 pointer-events-none font-medium ${
+          lifted
+            ? "top-0 text-[9px] text-[#C9A96E] uppercase tracking-[0.2em]"
+            : "top-4 text-sm text-[#999]"
+        }`}
+      >
+        {label}
+      </label>
+
+      <div className="flex items-center gap-2 border-b border-zinc-300 focus-within:border-[#C9A96E] transition-colors relative">
+        {icon && (
+          <span className={`text-[#999] transition-colors mt-4 ${lifted ? "text-[#C9A96E]" : ""}`}>
+            {icon}
+          </span>
+        )}
+        <input
+          id={id}
+          type={type}
+          required={required}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          className="w-full bg-transparent pt-5 pb-2 text-sm text-[#1A1A1A] outline-none placeholder-transparent"
+        />
+      </div>
     </div>
   );
 }

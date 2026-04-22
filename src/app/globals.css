@@ -2,21 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── SOBHA Brand CSS Custom Properties ─── */
+:root {
+  --gold: #C9A96E;
+  --dark: #0A0A0A;
+  --charcoal: #111111;
+  --cream: #FAFAF8;
+  --white: #FFFFFF;
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 @layer base {
   body {
-    @apply bg-white text-zinc-900 antialiased font-sans;
+    @apply bg-white text-[#1A1A1A] antialiased font-sans;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-serif;
   }
 
   ::selection {
-    @apply bg-primary/20 text-zinc-900;
+    background: rgba(201, 169, 110, 0.2);
+    color: #1A1A1A;
   }
 
   :focus-visible {
@@ -24,7 +38,7 @@ html {
   }
 }
 
-/* Safe area for mobile sticky bar */
+/* ─── Safe area for mobile sticky bar ─── */
 .pb-mobile-bar {
   padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
 }
@@ -35,16 +49,45 @@ html {
   }
 }
 
+/* ─── Focus ring utility ─── */
 @layer components {
   .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A96E]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
   }
 }
 
+/* ─── Utility classes ─── */
 @layer utilities {
   .vertical-text {
     writing-mode: vertical-rl;
     text-orientation: mixed;
+  }
+
+  /* Section entrance animations */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes lineGrow {
+    from { transform: scaleX(0); transform-origin: left; }
+    to { transform: scaleX(1); transform-origin: left; }
+  }
+
+  @keyframes kenBurns {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
   }
 
   @keyframes fade-in {
@@ -58,12 +101,93 @@ html {
     }
   }
 
+  .animate-fade-up {
+    animation: fadeUp 0.8s ease-out both;
+  }
+
   .animate-fade-in {
     animation: fade-in 800ms ease-out both;
   }
+
+  .animate-ken-burns {
+    animation: kenBurns 10s ease-in-out both;
+  }
+
+  /* Staggered delays for entrance animations */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
 }
 
-/* Next.js dev tools overlay portal (dev-only element) */
+/* ─── Custom range slider — gold SOBHA style ─── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 1px;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: #E5E7EB;
+  height: 1px;
+  border-radius: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #C9A96E;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  margin-top: -7px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #C9A96E;
+  transition: transform 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-track {
+  background: #E5E7EB;
+  height: 1px;
+  border-radius: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: #C9A96E;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #C9A96E;
+}
+
+/* ─── Scroll-reveal utility (JS adds .revealed class) ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Mega nav animation ─── */
+.mega-dropdown {
+  transform-origin: top;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ─── Next.js dev tools portal ─── */
 nextjs-portal {
   left: unset !important;
   top: -1px !important;

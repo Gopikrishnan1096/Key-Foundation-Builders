@@ -2,163 +2,269 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { site } from "@/lib/site";
 import { Logo } from "@/components/brand/Logo";
 
-const nav = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/projects", label: "Projects" },
-  { href: "/contact", label: "Contact" },
+// ── Mega-nav structure ──────────────────────────────────────────────────────
+const megaNav = [
+  {
+    label: "WHO WE ARE",
+    href: "/about",
+    items: [
+      { label: "Our Philosophy", href: "/about#philosophy" },
+      { label: "Leadership", href: "/about#leadership" },
+      { label: "Our Legacy", href: "/about#legacy" },
+      { label: "Awards & Recognition", href: "/about#awards" },
+    ],
+  },
+  {
+    label: "WHAT WE DO",
+    href: "/services",
+    items: [
+      { label: "Residential Construction", href: "/services#residential" },
+      { label: "Commercial Projects", href: "/services#commercial" },
+      { label: "Steel Structures", href: "/services#steel" },
+      { label: "Godown & Industrial", href: "/services#godown" },
+      { label: "Renovation & Maintenance", href: "/services#renovation" },
+    ],
+  },
+  {
+    label: "PROJECTS",
+    href: "/projects",
+    items: [
+      { label: "All Projects", href: "/projects" },
+      { label: "Residential", href: "/projects?cat=houses" },
+      { label: "Commercial", href: "/projects?cat=commercial" },
+      { label: "Industrial", href: "/projects?cat=warehouses" },
+    ],
+  },
+  {
+    label: "CONTACT",
+    href: "/contact",
+    items: [],
+  },
+];
+
+const utilityLinks = [
+  { label: "GALLERY", href: "/gallery" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 export function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const menuTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isHome = pathname === "/";
 
+  // ── Scroll listener ───────────────────────────────────────────────────────
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  // ── Close mobile on route change ──────────────────────────────────────────
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
 
+  // ── Body scroll lock when mobile open ─────────────────────────────────────
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
-  // User requested to "lock" the navigation bar to the solid styling everywhere
-  const isTransparent = false;
-  const onDarkBackground = false;
+  // ── Nav bg: transparent on home hero, solid black on scroll / other pages ─
+  const isTransparent = isHome && !scrolled;
+
+  // ── Mega-menu hover helpers ───────────────────────────────────────────────
+  const openMenu = (label: string) => {
+    if (menuTimerRef.current) clearTimeout(menuTimerRef.current);
+    setActiveMenu(label);
+  };
+  const closeMenu = () => {
+    menuTimerRef.current = setTimeout(() => setActiveMenu(null), 120);
+  };
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-      isTransparent
-        ? "bg-transparent"
-        : "bg-white/95 border-b border-zinc-200 backdrop-blur-md shadow-sm"
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      isTransparent ? "bg-transparent" : "bg-[#0A0A0A] border-b border-white/5"
     }`}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 h-20 sm:h-24">
-        <Logo
-          variant="header"
-          onDarkBackground={onDarkBackground}
-          isHome={isHome}
-        />
+      {/* ── Utility bar (top) ── */}
+      <div className={`hidden lg:flex justify-end items-center px-8 h-8 border-b gap-8 transition-all duration-500 ${
+        isTransparent ? "border-white/10" : "border-white/5"
+      }`}>
+        {utilityLinks.map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            className="text-[10px] text-white/50 font-bold tracking-[0.2em] uppercase hover:text-[#C9A96E] transition-colors"
+          >
+            {l.label}
+          </Link>
+        ))}
+      </div>
 
-        <nav className="hidden items-center gap-12 md:flex" aria-label="Main">
-          {nav.map((item) => {
-            const active = pathname === item.href;
+      {/* ── Main nav bar ── */}
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-20">
+        {/* Logo */}
+        <Logo variant="header" onDarkBackground={true} isHome={isHome} />
+
+        {/* Desktop nav */}
+        <nav className="hidden lg:flex items-center gap-10" aria-label="Main">
+          {megaNav.map((item) => {
+            const hasItems = item.items.length > 0;
+            const isActive = pathname === item.href || pathname.startsWith(item.href + "?");
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:text-primary ${
-                  active
-                    ? isTransparent
-                      ? "text-primary pb-1"
-                      : "text-primary border-b border-primary/40 pb-1"
-                    : isTransparent
-                    ? "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
-                    : "text-zinc-600"
-                }`}
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => hasItems && openMenu(item.label)}
+                onMouseLeave={closeMenu}
               >
-                {item.label}
-              </Link>
+                <Link
+                  href={item.href}
+                  className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors ${
+                    isActive ? "text-[#C9A96E]" : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                  {hasItems && (
+                    <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeMenu === item.label ? "rotate-180" : ""}`} />
+                  )}
+                </Link>
+
+                {/* Mega dropdown */}
+                {hasItems && (
+                  <div
+                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-6 transition-all duration-200 ${
+                      activeMenu === item.label
+                        ? "opacity-100 pointer-events-auto translate-y-0"
+                        : "opacity-0 pointer-events-none -translate-y-2"
+                    }`}
+                    onMouseEnter={() => openMenu(item.label)}
+                    onMouseLeave={closeMenu}
+                  >
+                    <div className="bg-[#0A0A0A] border border-white/10 p-8 min-w-[240px] shadow-2xl">
+                      <p className="text-[10px] text-[#C9A96E] font-bold tracking-[0.25em] uppercase mb-6">
+                        {item.label}
+                      </p>
+                      <ul className="space-y-4">
+                        {item.items.map((sub) => (
+                          <li key={sub.href}>
+                            <Link
+                              href={sub.href}
+                              className="block text-sm text-white/70 hover:text-[#C9A96E] transition-colors font-medium leading-tight"
+                            >
+                              {sub.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </div>
             );
           })}
         </nav>
 
-        <div className="hidden md:block">
+        {/* CTA */}
+        <div className="hidden lg:block">
           <Link
             href="/contact"
-            className={`group inline-flex items-center px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${
-              isTransparent
-                ? "bg-white/20 backdrop-blur-sm border border-white/60 text-white hover:bg-white hover:text-zinc-900"
-                : "bg-primary text-white hover:bg-zinc-900"
-            }`}
+            className="inline-flex items-center px-7 py-3 text-[11px] font-bold tracking-[0.15em] uppercase border border-white/40 text-white hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all duration-300"
           >
-            Inquire Now
+            INQUIRE NOW
           </Link>
         </div>
 
+        {/* Mobile hamburger */}
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-md text-primary md:hidden transition-all hover:bg-primary hover:text-white active:scale-95"
-          /* eslint-disable-next-line jsx-a11y/aria-proptypes */
-          aria-expanded={open}
+          className="inline-flex h-10 w-10 items-center justify-center text-white lg:hidden"
+          aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMobileOpen((v) => !v)}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
-      {/* Mobile Menu — z-[60] so it renders above the sticky header bar */}
+      {/* ── Mobile full-screen overlay menu ── */}
       <div
         id="mobile-menu"
-        aria-hidden={!open}
-        className={`fixed inset-0 z-[60] bg-white flex flex-col transition-transform duration-300 ease-in-out md:hidden ${
-          open ? "translate-x-0" : "translate-x-full"
-        } ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+        aria-hidden={!mobileOpen}
+        className={`fixed inset-0 z-[60] bg-[#0A0A0A] flex flex-col transition-transform duration-400 ease-in-out lg:hidden ${
+          mobileOpen ? "translate-x-0" : "translate-x-full"
+        } ${mobileOpen ? "pointer-events-auto" : "pointer-events-none"}`}
       >
-        {/* Top bar — logo + close button */}
-        <div className="flex items-center justify-between px-5 h-20 border-b border-zinc-100 shrink-0">
-          <Logo variant="header" withLink={false} />
+        {/* Top bar */}
+        <div className="flex items-center justify-between px-6 h-20 border-b border-white/10 shrink-0">
+          <Logo variant="header" onDarkBackground={true} withLink={false} />
           <button
             type="button"
-            onClick={() => setOpen(false)}
+            onClick={() => setMobileOpen(false)}
             aria-label="Close menu"
-            className="flex items-center gap-2 text-zinc-500 hover:text-primary transition-colors"
+            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
           >
             <X className="h-6 w-6" />
-            <span className="text-xs font-bold uppercase tracking-widest">Close</span>
           </button>
         </div>
 
         {/* Nav links */}
-        <nav className="flex flex-col px-6 pt-8 gap-1 flex-1 overflow-y-auto" aria-label="Mobile">
-          {nav.map((item) => {
+        <nav className="flex flex-col px-6 pt-10 gap-0 flex-1 overflow-y-auto" aria-label="Mobile">
+          {megaNav.map((item) => {
             const active = pathname === item.href;
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 py-4 text-2xl font-serif border-b border-zinc-100 transition-colors ${
-                  active ? "text-primary" : "text-zinc-800 hover:text-primary"
-                }`}
-              >
-                {active && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <div key={item.label}>
+                <Link
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center py-5 text-2xl font-serif border-b border-white/10 transition-colors ${
+                    active ? "text-[#C9A96E]" : "text-white hover:text-[#C9A96E]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+                {item.items.length > 0 && (
+                  <div className="pl-4 pb-2 space-y-2">
+                    {item.items.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block py-2 text-sm text-white/50 hover:text-[#C9A96E] transition-colors"
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
                 )}
-                {item.label}
-              </Link>
+              </div>
             );
           })}
         </nav>
 
-        {/* CTA at bottom */}
+        {/* Bottom CTA */}
         <div className="px-6 pb-10 pt-6 shrink-0">
           <Link
             href="/contact"
-            onClick={() => setOpen(false)}
-            className="flex items-center justify-center w-full bg-primary text-white py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-zinc-900 transition-colors"
+            onClick={() => setMobileOpen(false)}
+            className="flex items-center justify-center w-full border border-[#C9A96E] text-[#C9A96E] py-5 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
           >
-            Request Consultation
+            GET FREE QUOTE
           </Link>
+          <p className="text-center text-white/30 text-xs mt-4">
+            <a href={`tel:${site.phoneRaw}`} className="hover:text-[#C9A96E] transition-colors">
+              {site.phone}
+            </a>
+          </p>
         </div>
       </div>
     </header>

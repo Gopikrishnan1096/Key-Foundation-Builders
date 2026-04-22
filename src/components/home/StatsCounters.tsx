@@ -1,24 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Building2, Headset, Smile, BadgeCheck } from "lucide-react";
-import { Container } from "@/components/ui/Container";
 
-const items = [
-  { icon: BadgeCheck, value: 30, suffix: "+", label: "Years Experience" },
-  { icon: Building2, value: 100, suffix: "+", label: "Projects Completed" },
-  { icon: Smile, value: 500, suffix: "+", label: "Happy Clients" },
-  { icon: Headset, kind: "text" as const, main: "24/7", label: "Support" },
+const stats = [
+  { value: 30, suffix: "+", label: "Years of Trust", kind: "count" as const },
+  { value: 100, suffix: "+", label: "Projects Done", kind: "count" as const },
+  { value: 5, suffix: "", label: "Service Types", kind: "count" as const },
+  { value: null, suffix: "", label: "Coverage", main: "Kerala-Wide", kind: "text" as const },
 ];
 
-function useCountUp(target: number, active: boolean, duration = 1400) {
+function useCountUp(target: number, active: boolean, duration = 1600) {
   const [n, setN] = useState(0);
   const startRef = useRef<number | null>(null);
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!active) return;
-
     const step = (ts: number) => {
       if (startRef.current === null) startRef.current = ts;
       const p = Math.min((ts - startRef.current) / duration, 1);
@@ -26,7 +23,6 @@ function useCountUp(target: number, active: boolean, duration = 1400) {
       setN(Math.round(target * eased));
       if (p < 1) frameRef.current = requestAnimationFrame(step);
     };
-
     frameRef.current = requestAnimationFrame(step);
     return () => {
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
@@ -37,23 +33,23 @@ function useCountUp(target: number, active: boolean, duration = 1400) {
   return n;
 }
 
-type StatDef =
-  | {
-      icon: typeof Building2;
-      value: number;
-      suffix: string;
-      label: string;
-      kind?: "count";
-    }
-  | {
-      icon: typeof Headset;
-      kind: "text";
-      main: string;
-      label: string;
-    };
+function StatItem({ stat, active }: { stat: typeof stats[0]; active: boolean }) {
+  const count = useCountUp(stat.value ?? 0, active && stat.kind === "count");
+  const display = stat.kind === "text" ? stat.main : `${count}${stat.suffix}`;
 
-function StatItem(def: StatDef) {
-  const Icon = def.icon;
+  return (
+    <div className="flex flex-col items-center py-14 px-6 border-r border-white/10 last:border-r-0 transition-all">
+      <div className={`text-5xl md:text-7xl font-serif leading-none mb-4 transition-all duration-700 ${active ? "text-[#C9A96E] opacity-100" : "text-[#C9A96E]/20 opacity-0"}`}>
+        {display}
+      </div>
+      <div className="text-[11px] text-white/40 font-bold uppercase tracking-[0.25em]">
+        {stat.label}
+      </div>
+    </div>
+  );
+}
+
+export function StatsCounters() {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
@@ -61,49 +57,22 @@ function StatItem(def: StatDef) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e?.isIntersecting) setActive(true);
-      },
-      { threshold: 0.2 },
+      ([e]) => { if (e?.isIntersecting) setActive(true); },
+      { threshold: 0.3 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
-  const isText = def.kind === "text";
-  const target = !isText ? def.value : 0;
-  const display = useCountUp(target, active && !isText);
-  const suffix = !isText ? def.suffix : "";
-
   return (
-    <div
-      ref={ref}
-      className="flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-    >
-      <Icon className="h-8 w-8 text-accent" aria-hidden />
-      {isText ? (
-        <p className="mt-3 text-2xl font-bold text-primary">{def.main}</p>
-      ) : (
-        <p className="mt-3 text-3xl font-bold tabular-nums text-primary">
-          {display}
-          {suffix}
-        </p>
-      )}
-      <p className="mt-1 text-sm font-medium text-slate-600">{def.label}</p>
-    </div>
-  );
-}
-
-export function StatsCounters() {
-  return (
-    <section className="bg-slate-50 py-16">
-      <Container>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((item) => (
-            <StatItem key={item.label} {...item} />
+    <section className="bg-[#0A0A0A] border-y border-white/5" ref={ref}>
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-y divide-white/10 lg:divide-y-0">
+          {stats.map((stat) => (
+            <StatItem key={stat.label} stat={stat} active={active} />
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
