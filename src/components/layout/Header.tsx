@@ -122,7 +122,7 @@ export function Header() {
           </div>
 
           {/* CENTERED LOGO */}
-          <div className="flex justify-center flex-shrink-0 mt-[10px]">
+          <div className="flex justify-center flex-shrink-0 mt-[5px]">
             <Logo variant="header" onDarkBackground={true} isHome={isHome} />
           </div>
 
