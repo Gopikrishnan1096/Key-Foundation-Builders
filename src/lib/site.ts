@@ -16,6 +16,7 @@ export const site = {
     state: "Kerala",
     pin: "682315",
     country: "India",
+
   },
   mapsUrl: "https://maps.app.goo.gl/mWky1chFCnjeQgTa6",
   mapsEmbed:
