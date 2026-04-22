@@ -92,7 +92,7 @@ export const serviceBlocks: ServiceBlock[] = [
       "Steel structures for industrial and commercial use — planned for clear spans, speed of execution, and safety on site.",
       "We coordinate fabrication drawings, anchor bolts, erection sequencing, and finishing interfaces to reduce rework and downtime.",
     ],
-    image: img("photo-1581092160562-40aa08e66837"),
+    image: img("photo-1541888089408-da2ba8e530fb"),
     imageAlt: "Steel structure construction",
   },
   {

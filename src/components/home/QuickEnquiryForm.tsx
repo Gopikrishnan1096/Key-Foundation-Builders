@@ -144,10 +144,10 @@ function FloatingInput({
       {/* Floating label */}
       <label
         htmlFor={id}
-        className={`absolute left-0 transition-all duration-200 pointer-events-none font-medium ${
+        className={`absolute transition-all duration-200 pointer-events-none font-medium ${
           lifted
-            ? "top-0 text-[9px] text-[#C9A96E] uppercase tracking-[0.2em]"
-            : "top-4 text-sm text-[#999]"
+            ? "top-0 left-0 text-[9px] text-[#C9A96E] uppercase tracking-[0.2em]"
+            : `top-4 text-sm text-[#999] ${icon ? "left-7" : "left-0"}`
         }`}
       >
         {label}

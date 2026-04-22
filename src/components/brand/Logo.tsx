@@ -26,19 +26,14 @@ export function Logo({
 }: Props) {
   const isHeader = variant === "header";
 
-  /** Strong white hale so black logos are visible on dark hero */
-  const darkHeroFilter =
-    "[filter:drop-shadow(0_2px_8px_rgba(0,0,0,0.8))_drop-shadow(0_0_15px_rgba(255,255,255,0.6))] bg-white/10 rounded-xl p-1";
+  /** Turns the black logo perfectly white */
+  const whiteFilter = onDarkBackground ? "brightness-0 invert" : "";
 
   const headerImgClass =
     isHome && isHeader
-      ? `w-[54.51px] h-[64px] object-contain object-left ${
-          onDarkBackground ? darkHeroFilter : ""
-        }`
+      ? `h-20 sm:h-[90px] w-auto max-w-[14rem] object-contain object-center ${whiteFilter}`
       : isHeader
-        ? `h-14 w-auto max-w-[8rem] object-contain object-left sm:h-16 sm:max-w-[10rem] md:h-16 md:max-w-[12rem] ${
-            onDarkBackground ? darkHeroFilter : ""
-          }`
+        ? `h-14 w-auto max-w-[8rem] object-contain object-center sm:h-16 sm:max-w-[10rem] md:h-16 md:max-w-[12rem] ${whiteFilter}`
         : "";
 
   const img = (
@@ -57,7 +52,7 @@ export function Logo({
       className={
         isHeader
           ? `${headerImgClass} ${className}`
-          : `h-24 w-auto max-w-[12rem] object-contain object-left sm:h-32 sm:max-w-[16rem] ${className}`
+          : `h-24 w-auto max-w-[12rem] object-contain object-left sm:h-32 sm:max-w-[16rem] ${whiteFilter} ${className}`
       }
       priority={isHeader}
     />
