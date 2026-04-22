@@ -94,20 +94,7 @@ export function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
       isTransparent ? "bg-transparent" : "bg-[#0A0A0A] border-b border-white/5"
     }`}>
-      {/* ── Utility bar (top) — hidden on hero, shown on scrolled ── */}
-      <div className={`hidden lg:flex justify-end items-center px-8 gap-8 transition-all duration-500 border-b overflow-hidden ${
-        isTransparent ? "h-0 opacity-0 pointer-events-none border-transparent" : "h-8 opacity-100 border-white/5"
-      }`}>
-        {utilityLinks.map((l) => (
-          <Link
-            key={l.href}
-            href={l.href}
-            className="text-[10px] text-white/50 font-bold tracking-[0.2em] uppercase hover:text-[#C9A96E] transition-colors"
-          >
-            {l.label}
-          </Link>
-        ))}
-      </div>
+
 
       {/* ── Main nav bar ── */}
       {isTransparent ? (
