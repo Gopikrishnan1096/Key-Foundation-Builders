@@ -91,16 +91,15 @@ export function Header() {
   };
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-      isTransparent ? "bg-transparent" : "bg-[#0A0A0A] border-b border-white/5"
-    }`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${isTransparent ? "bg-transparent" : "bg-[#0A0A0A] border-b border-white/5"
+      }`}>
 
 
       {/* ── Main nav bar ── */}
       {isTransparent ? (
         /* ── HERO STATE: Centered logo, 'MENU' hamburger left ── */
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-24">
-          
+
           {/* Left: MENU button */}
           <div className="flex-1 flex items-center">
             <button
@@ -123,7 +122,7 @@ export function Header() {
           </div>
 
           {/* CENTERED LOGO */}
-          <div className="flex justify-center flex-shrink-0">
+          <div className="flex justify-center flex-shrink-0 mt-[10px]">
             <Logo variant="header" onDarkBackground={true} isHome={isHome} />
           </div>
 
@@ -132,7 +131,7 @@ export function Header() {
         </div>
       ) : (
         /* ── SCROLLED STATE: Normal left-aligned logo ── */
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-20">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-24">
           {/* Logo */}
           <Logo variant="header" onDarkBackground={true} isHome={isHome} />
 
@@ -150,9 +149,8 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors ${
-                      isActive ? "text-[#C9A96E]" : "text-white/80 hover:text-white"
-                    }`}
+                    className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors ${isActive ? "text-[#C9A96E]" : "text-white/80 hover:text-white"
+                      }`}
                   >
                     {item.label}
                     {hasItems && (
@@ -160,40 +158,39 @@ export function Header() {
                     )}
                   </Link>
 
-                {/* Mega dropdown */}
-                {hasItems && (
-                  <div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-6 transition-all duration-200 ${
-                      activeMenu === item.label
+                  {/* Mega dropdown */}
+                  {hasItems && (
+                    <div
+                      className={`absolute top-full left-1/2 -translate-x-1/2 mt-6 transition-all duration-200 ${activeMenu === item.label
                         ? "opacity-100 pointer-events-auto translate-y-0"
                         : "opacity-0 pointer-events-none -translate-y-2"
-                    }`}
-                    onMouseEnter={() => openMenu(item.label)}
-                    onMouseLeave={closeMenu}
-                  >
-                    <div className="bg-[#0A0A0A] border border-white/10 p-8 min-w-[240px] shadow-2xl">
-                      <p className="text-[10px] text-[#C9A96E] font-bold tracking-[0.25em] uppercase mb-6">
-                        {item.label}
-                      </p>
-                      <ul className="space-y-4">
-                        {item.items.map((sub) => (
-                          <li key={sub.href}>
-                            <Link
-                              href={sub.href}
-                              className="block text-sm text-white/70 hover:text-[#C9A96E] transition-colors font-medium leading-tight"
-                            >
-                              {sub.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                        }`}
+                      onMouseEnter={() => openMenu(item.label)}
+                      onMouseLeave={closeMenu}
+                    >
+                      <div className="bg-[#0A0A0A] border border-white/10 p-8 min-w-[240px] shadow-2xl">
+                        <p className="text-[10px] text-[#C9A96E] font-bold tracking-[0.25em] uppercase mb-6">
+                          {item.label}
+                        </p>
+                        <ul className="space-y-4">
+                          {item.items.map((sub) => (
+                            <li key={sub.href}>
+                              <Link
+                                href={sub.href}
+                                className="block text-sm text-white/70 hover:text-[#C9A96E] transition-colors font-medium leading-tight"
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </nav>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
 
           {/* CTA */}
           <div className="hidden lg:block">
@@ -223,9 +220,8 @@ export function Header() {
       <div
         id="mobile-menu"
         aria-hidden={!mobileOpen}
-        className={`fixed inset-0 z-[60] bg-[#0A0A0A] flex flex-col transition-transform duration-400 ease-in-out lg:hidden ${
-          mobileOpen ? "translate-x-0" : "translate-x-full"
-        } ${mobileOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-[60] bg-[#0A0A0A] flex flex-col transition-transform duration-400 ease-in-out lg:hidden ${mobileOpen ? "translate-x-0" : "translate-x-full"
+          } ${mobileOpen ? "pointer-events-auto" : "pointer-events-none"}`}
       >
         {/* Top bar */}
         <div className="flex items-center justify-between px-6 h-20 border-b border-white/10 shrink-0">
@@ -249,9 +245,8 @@ export function Header() {
                 <Link
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center py-5 text-2xl font-serif border-b border-white/10 transition-colors ${
-                    active ? "text-[#C9A96E]" : "text-white hover:text-[#C9A96E]"
-                  }`}
+                  className={`flex items-center py-5 text-2xl font-serif border-b border-white/10 transition-colors ${active ? "text-[#C9A96E]" : "text-white hover:text-[#C9A96E]"
+                    }`}
                 >
                   {item.label}
                 </Link>

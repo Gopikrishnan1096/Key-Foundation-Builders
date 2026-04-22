@@ -30,11 +30,9 @@ export function Logo({
   const whiteFilter = onDarkBackground ? "brightness-0 invert" : "";
 
   const headerImgClass =
-    isHome && isHeader
-      ? `h-20 sm:h-[90px] w-auto max-w-[14rem] object-contain object-center ${whiteFilter}`
-      : isHeader
-        ? `h-14 w-auto max-w-[8rem] object-contain object-center sm:h-16 sm:max-w-[10rem] md:h-16 md:max-w-[12rem] ${whiteFilter}`
-        : "";
+    isHeader
+      ? `h-[74px] w-auto max-w-[14rem] object-contain object-center ${whiteFilter}`
+      : "";
 
   const img = (
     <Image
