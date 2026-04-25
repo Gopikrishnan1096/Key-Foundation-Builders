@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { value: 30, suffix: "+", label: "Years of Trust", kind: "count" as const },
-  { value: 100, suffix: "+", label: "Projects Done", kind: "count" as const },
-  { value: 5, suffix: "", label: "Service Types", kind: "count" as const },
-  { value: null, suffix: "", label: "Coverage", main: "Kerala-Wide", kind: "text" as const },
+  { value: 30,  suffix: "+", label: "Years of Trust",         kind: "count" as const },
+  { value: 100, suffix: "+", label: "Projects Completed",      kind: "count" as const },
+  { value: 500, suffix: "+", label: "Happy Clients",           kind: "count" as const },
+  { value: 8,   suffix: "+", label: "Districts Served",        kind: "count" as const },
 ];
 
-function useCountUp(target: number, active: boolean, duration = 1600) {
+function useCountUp(target: number, active: boolean, duration = 1800) {
   const [n, setN] = useState(0);
   const startRef = useRef<number | null>(null);
   const frameRef = useRef<number | null>(null);
@@ -19,7 +19,7 @@ function useCountUp(target: number, active: boolean, duration = 1600) {
     const step = (ts: number) => {
       if (startRef.current === null) startRef.current = ts;
       const p = Math.min((ts - startRef.current) / duration, 1);
-      const eased = 1 - (1 - p) ** 3;
+      const eased = 1 - (1 - p) ** 4; // quartic ease-out for dramatic effect
       setN(Math.round(target * eased));
       if (p < 1) frameRef.current = requestAnimationFrame(step);
     };
@@ -33,18 +33,37 @@ function useCountUp(target: number, active: boolean, duration = 1600) {
   return n;
 }
 
-function StatItem({ stat, active }: { stat: typeof stats[0]; active: boolean }) {
-  const count = useCountUp(stat.value ?? 0, active && stat.kind === "count");
-  const display = stat.kind === "text" ? stat.main : `${count}${stat.suffix}`;
+function StatItem({ stat, active, index }: { stat: typeof stats[0]; active: boolean; index: number }) {
+  const count = useCountUp(stat.value, active && stat.kind === "count");
 
   return (
-    <div className="flex flex-col items-center py-14 px-6 border-r border-white/10 last:border-r-0 transition-all">
-      <div className={`text-5xl md:text-7xl font-serif leading-none mb-4 transition-all duration-700 ${active ? "text-[#C9A96E] opacity-100" : "text-[#C9A96E]/20 opacity-0"}`}>
-        {display}
+    <div
+      className={`relative flex flex-col items-center py-14 px-6 transition-all duration-700 ${
+        active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      {/* Vertical divider — not on last */}
+      {index < stats.length - 1 && (
+        <div className="absolute right-0 top-1/4 h-1/2 w-[1px] bg-white/8" />
+      )}
+
+      {/* Number */}
+      <div className={`text-5xl md:text-7xl font-serif leading-none mb-4 transition-all duration-1000 ${
+        active ? "text-[#C9A96E]" : "text-[#C9A96E]/10"
+      }`}>
+        {count}{stat.suffix}
       </div>
-      <div className="text-[11px] text-white/40 font-bold uppercase tracking-[0.25em]">
+
+      {/* Label */}
+      <div className="text-[11px] text-white/40 font-bold uppercase tracking-[0.3em] text-center">
         {stat.label}
       </div>
+
+      {/* Gold underline — animates in */}
+      <div className={`mt-5 h-[1px] bg-[#C9A96E]/40 transition-all duration-700 ${
+        active ? "w-8" : "w-0"
+      }`} style={{ transitionDelay: `${index * 100 + 400}ms` }} />
     </div>
   );
 }
@@ -58,18 +77,21 @@ export function StatsCounters() {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { if (e?.isIntersecting) setActive(true); },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section className="bg-[#0A0A0A] border-y border-white/5" ref={ref}>
-      <div className="max-w-[1440px] mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 divide-y divide-white/10 lg:divide-y-0">
-          {stats.map((stat) => (
-            <StatItem key={stat.label} stat={stat} active={active} />
+    <section className="bg-[#0A0A0A] border-y border-white/5 relative overflow-hidden" ref={ref}>
+      {/* Subtle radial glow behind numbers */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,110,0.05)_0%,transparent_70%)] pointer-events-none" />
+
+      <div className="max-w-[1440px] mx-auto relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, i) => (
+            <StatItem key={stat.label} stat={stat} active={active} index={i} />
           ))}
         </div>
       </div>
