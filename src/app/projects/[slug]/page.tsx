@@ -103,13 +103,13 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         <div className="mt-14 rounded-2xl bg-primary p-8 text-center text-white shadow-lg">
           <h2 className="text-xl font-bold">Start your project</h2>
-          <p className="mx-auto mt-2 max-w-lg text-sm text-slate-300">
+          <p className="mx-auto mt-2 max-w-lg text-sm text-slate-100">
             Share your site location and goals — we’ll outline scope, timeline,
             and a clear estimate.
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-primary transition hover:bg-amber-400"
+            className="mt-6 inline-flex rounded-none bg-dark px-10 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-dark"
           >
             Contact us
           </Link>

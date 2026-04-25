@@ -14,12 +14,19 @@ export function ContactForm() {
     const phone = String(data.get("phone") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
-    const subject = encodeURIComponent(`Quote request from ${name || "website"}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\n\nMessage:\n${message}`,
-    );
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+    const msg = [
+      `🚀 *NEW INQUIRY FROM WEBSITE*`,
+      `--------------------------`,
+      `👤 *Name:* ${name || "–"}`,
+      `📞 *Phone:* ${phone || "–"}`,
+      `📝 *Message:* ${message || "–"}`,
+      `--------------------------`,
+    ].join("\n");
+
+    const waUrl = `https://wa.me/${site.whatsappRaw}?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
     setStatus("sent");
+    setTimeout(() => setStatus("idle"), 4000);
     form.reset();
   }
 
@@ -71,15 +78,15 @@ export function ContactForm() {
       </div>
       <button
         type="submit"
-        className="w-full bg-primary text-white py-5 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:bg-zinc-900"
+        disabled={status === "sent"}
+        className={`w-full py-5 text-[10px] font-bold uppercase tracking-[0.3em] transition-all ${
+          status === "sent" 
+            ? "bg-green-700 text-white cursor-not-allowed" 
+            : "bg-primary text-white hover:bg-zinc-900"
+        }`}
       >
-        Submit Inquiry
+        {status === "sent" ? "✓ Message Dispatched" : "Submit Inquiry"}
       </button>
-      {status === "sent" ? (
-        <p className="text-xs text-primary font-bold uppercase tracking-widest mt-4" role="status">
-          ✓ Inquiry Dispatched to Engineering Team
-        </p>
-      ) : null}
     </form>
   );
 }

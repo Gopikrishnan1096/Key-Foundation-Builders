@@ -67,13 +67,13 @@ export default function ServicesPage() {
       <section className="border-t border-slate-100 bg-primary py-16 text-white">
         <Container className="text-center">
           <h2 className="text-2xl font-bold">Need help choosing a service?</h2>
-          <p className="mx-auto mt-3 max-w-xl text-slate-300">
+          <p className="mx-auto mt-3 max-w-xl text-slate-100">
             Describe your site and goals — we&apos;ll recommend a package and
             rough timeline.
           </p>
           <Link
             href="/contact"
-            className="mt-8 inline-flex rounded-lg bg-accent px-8 py-3 text-sm font-semibold text-primary transition hover:bg-amber-400"
+            className="mt-8 inline-flex rounded-none bg-dark px-10 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-dark"
           >
             Contact Us
           </Link>
