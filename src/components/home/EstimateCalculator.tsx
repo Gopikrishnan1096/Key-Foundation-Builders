@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Wallet } from "lucide-react";
+import { site } from "@/lib/site";
 
 const RATES = {
   basic: 1900,
@@ -15,6 +16,19 @@ export function EstimateCalculator() {
   const [floors, setFloors] = useState<number>(1);
 
   const estimate = area * RATES[tier] * floors;
+
+  const msg = [
+    `📐 *PROJECT APPRAISAL REQUEST*`,
+    `--------------------------`,
+    `🏠 *Area:* ${area} sq.ft`,
+    `✨ *Tier:* ${tier.toUpperCase()}`,
+    `🏢 *Floors:* ${floors}`,
+    `💰 *Estimated Value:* ₹${(estimate / 100000).toFixed(1)}L`,
+    `--------------------------`,
+    `I would like to request a detailed specification for this project.`
+  ].join("\n");
+
+  const waUrl = `https://wa.me/${site.whatsappRaw}?text=${encodeURIComponent(msg)}`;
 
   return (
     <section className="bg-white py-24 md:py-32">
@@ -146,7 +160,9 @@ export function EstimateCalculator() {
 
                 {/* CTA */}
                 <a
-                  href="/contact"
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-12 flex items-center justify-center w-full border border-[#C9A96E] text-[#C9A96E] py-5 text-[10px] font-bold uppercase tracking-[0.25em] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300"
                 >
                   Request Detailed Specification

@@ -24,7 +24,7 @@ export function ProjectImageSlider({ images, alt }: Props) {
               key={src}
               className="relative min-w-0 shrink-0 grow-0 basis-full"
             >
-              <div className="relative aspect-[16/9] bg-slate-200">
+              <div className="relative aspect-[16/9] bg-[#0A0A0A]">
                 <Image
                   src={src}
                   alt={`${alt} — photo ${i + 1}`}
@@ -33,6 +33,7 @@ export function ProjectImageSlider({ images, alt }: Props) {
                   sizes="100vw"
                   priority={i === 0}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40 pointer-events-none" />
               </div>
             </div>
           ))}
