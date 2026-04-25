@@ -62,7 +62,7 @@ export function BrandStory() {
             {/* Body copy */}
             <div className={`space-y-5 transition-all duration-700 delay-200 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
               <p className="text-[#555] text-base leading-relaxed">
-                Since {site.founded}, Key Foundation Builders has earned Kerala's highest trust in civil
+                Since {site.founded}, Key Foundation Builders has earned Kerala&apos;s highest trust in civil
                 and steel construction — not through advertising, but through disciplined engineering,
                 quality materials, and unwavering on-time execution.
               </p>

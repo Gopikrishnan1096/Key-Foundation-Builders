@@ -68,10 +68,19 @@ export function Testimonials() {
     return () => obs.disconnect();
   }, []);
 
-  // Auto-advance
+  // Auto-advance — inline logic avoids exhaustive-deps on `transition`
   useEffect(() => {
-    const t = setInterval(() => transition("next"), 7000);
+    const t = setInterval(() => {
+      if (animating) return;
+      setDirection("next");
+      setAnimating(true);
+      setTimeout(() => {
+        setCurrent((c) => (c + 1) % quotes.length);
+        setAnimating(false);
+      }, 350);
+    }, 7000);
     return () => clearInterval(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
 
   function transition(dir: "next" | "prev") {
