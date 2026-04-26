@@ -20,7 +20,7 @@ const services = [
   {
     id: "steel",
     title: "Steel Structures",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e66837?auto=format&fit=crop&q=80&w=1200",
+    image: "/gallery/steel-structure.jpg",
     href: "/services#steel",
   },
   {
