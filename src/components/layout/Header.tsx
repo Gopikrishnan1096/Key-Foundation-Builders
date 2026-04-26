@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { X, ChevronDown } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { X, ArrowRight, ChevronDown } from "lucide-react";
 import { site } from "@/lib/site";
 import { Logo } from "@/components/brand/Logo";
 
@@ -84,188 +84,217 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#0A0A0A] border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
-          : "bg-transparent"
+      className={`absolute inset-x-0 top-0 z-50 transition-all duration-500 ${
+        isHome ? "bg-transparent" : "bg-[#0A0A0A]"
       }`}
     >
-      {/* ── Single unified nav bar ── */}
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-24">
-
-        {/* Logo */}
-        <Logo variant="header" onDarkBackground={true} isHome={isHome} />
-
-        {/* Desktop nav — always visible */}
-        <nav className="hidden lg:flex items-center gap-10" aria-label="Main">
-          {megaNav.map((item) => {
-            const hasItems = item.items.length > 0;
-            const isActive =
-              pathname === item.href || pathname.startsWith(item.href + "?");
-            return (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => hasItems && openMenu(item.label)}
-                onMouseLeave={closeMenu}
-              >
-                <Link
-                  href={item.href}
-                  className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors ${
-                    isActive
-                      ? "text-[#C9A96E]"
-                      : "text-white/85 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                  {hasItems && (
-                    <ChevronDown
-                      className={`w-3 h-3 transition-transform duration-200 ${
-                        activeMenu === item.label ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
-                </Link>
-
-                {/* Mega dropdown */}
-                {hasItems && (
-                  <div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-6 transition-all duration-200 ${
-                      activeMenu === item.label
-                        ? "opacity-100 pointer-events-auto translate-y-0"
-                        : "opacity-0 pointer-events-none -translate-y-2"
-                    }`}
-                    onMouseEnter={() => openMenu(item.label)}
-                    onMouseLeave={closeMenu}
-                  >
-                    <div className="bg-[#0A0A0A] border border-white/10 p-8 min-w-[240px] shadow-2xl">
-                      <p className="text-[10px] text-[#C9A96E] font-bold tracking-[0.25em] uppercase mb-6">
-                        {item.label}
-                      </p>
-                      <ul className="space-y-4">
-                        {item.items.map((sub) => (
-                          <li key={sub.href}>
-                            <Link
-                              href={sub.href}
-                              className="block text-sm text-white/70 hover:text-[#C9A96E] transition-colors font-medium leading-tight"
-                            >
-                              {sub.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
+      {isHome ? (
+        <div className="mx-auto grid grid-cols-3 items-center max-w-[1440px] px-6 lg:px-12 h-24">
+          {/* ── Home Page Nav Bar (Minimalist) ── */}
+          {/* Left: Menu Toggle */}
+          <div className="flex justify-start">
+            <button
+              type="button"
+              className="group flex items-center gap-3 text-white transition-opacity hover:opacity-80"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setMobileOpen(true)}
+            >
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase">
+                MENU
+              </span>
+              <div className="flex flex-col gap-[6px] items-start w-6">
+                <span className="h-[1px] bg-white w-6 transition-all duration-300 group-hover:w-4" />
+                <span className="h-[1px] bg-white w-4 transition-all duration-300 group-hover:w-6" />
               </div>
-            );
-          })}
-        </nav>
+            </button>
+          </div>
 
-        {/* Right: CTA + mobile hamburger */}
-        <div className="flex items-center gap-4">
-          {/* Desktop CTA */}
-          <Link
-            href="/contact"
-            className="hidden lg:inline-flex items-center px-7 py-3 text-[11px] font-bold tracking-[0.15em] uppercase border border-white/40 text-white hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all duration-300"
-          >
-            INQUIRE NOW
-          </Link>
+          {/* Center: Logo */}
+          <div className="flex justify-center">
+            <Logo variant="header" onDarkBackground={true} isHome={true} />
+          </div>
 
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center text-white lg:hidden"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-menu"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMobileOpen((v) => !v)}
-          >
-            {mobileOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              /* Custom 3-line hamburger */
-              <div className="flex flex-col gap-[5px] items-end justify-center w-6">
-                <span className="h-[1px] bg-white w-full transition-all duration-300" />
-                <span className="h-[1px] bg-white w-4 transition-all duration-300" />
-                <span className="h-[1px] bg-white w-5 transition-all duration-300" />
-              </div>
-            )}
-          </button>
+          {/* Right: CTA */}
+          <div className="flex justify-end">
+            <Link
+              href="/contact"
+              className="hidden lg:inline-flex items-center px-6 py-2.5 text-[10px] font-bold tracking-[0.15em] uppercase border border-white/30 text-white hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all duration-300"
+            >
+              INQUIRE NOW
+            </Link>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 lg:px-12 h-24">
+          {/* ── Inner Pages Nav Bar (Full Desktop Nav) ── */}
+          
+          {/* Logo */}
+          <Logo variant="header" onDarkBackground={true} isHome={false} />
 
-      {/* ── Mobile full-screen overlay menu ── */}
+          {/* Desktop nav — always visible on large screens */}
+          <nav className="hidden lg:flex items-center gap-10" aria-label="Main">
+            {megaNav.map((item) => {
+              const hasItems = item.items.length > 0;
+              const isActive =
+                pathname === item.href || pathname.startsWith(item.href + "?");
+              return (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => hasItems && openMenu(item.label)}
+                  onMouseLeave={closeMenu}
+                >
+                  <Link
+                    href={item.href}
+                    className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors ${
+                      isActive
+                        ? "text-[#C9A96E]"
+                        : "text-white/85 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                    {hasItems && (
+                      <ChevronDown
+                        className={`w-3 h-3 transition-transform duration-200 ${
+                          activeMenu === item.label ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
+                  </Link>
+
+                  {/* Mega dropdown */}
+                  {hasItems && (
+                    <div
+                      className={`absolute top-full left-1/2 -translate-x-1/2 mt-6 transition-all duration-200 ${
+                        activeMenu === item.label
+                          ? "opacity-100 pointer-events-auto translate-y-0"
+                          : "opacity-0 pointer-events-none -translate-y-2"
+                      }`}
+                      onMouseEnter={() => openMenu(item.label)}
+                      onMouseLeave={closeMenu}
+                    >
+                      <div className="bg-[#0A0A0A] border border-white/10 p-8 min-w-[240px] shadow-2xl">
+                        <p className="text-[10px] text-[#C9A96E] font-bold tracking-[0.25em] uppercase mb-6">
+                          {item.label}
+                        </p>
+                        <ul className="space-y-4">
+                          {item.items.map((sub) => (
+                            <li key={sub.href}>
+                              <Link
+                                href={sub.href}
+                                className="block text-sm text-white/70 hover:text-[#C9A96E] transition-colors font-medium leading-tight"
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+
+          {/* Right: CTA + mobile hamburger */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/contact"
+              className="hidden lg:inline-flex items-center px-6 py-2.5 text-[10px] font-bold tracking-[0.15em] uppercase border border-white/30 text-white hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all duration-300"
+            >
+              INQUIRE NOW
+            </Link>
+            
+            <button
+              type="button"
+              className="lg:hidden group flex items-center gap-3 text-white transition-opacity hover:opacity-80"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setMobileOpen(true)}
+            >
+              <div className="flex flex-col gap-[6px] items-start w-6">
+                <span className="h-[1px] bg-white w-6 transition-all duration-300 group-hover:w-4" />
+                <span className="h-[1px] bg-white w-4 transition-all duration-300 group-hover:w-6" />
+              </div>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Full-screen mobile menu ── */}
       <div
         id="mobile-menu"
         aria-hidden={!mobileOpen}
-        className={`fixed inset-0 z-[60] bg-[#0A0A0A] flex flex-col transition-transform duration-400 ease-in-out lg:hidden ${
-          mobileOpen ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"
+        className={`fixed inset-0 z-[70] bg-[#0A0A0A] flex flex-col transition-transform duration-500 ease-in-out ${
+          mobileOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-6 h-20 border-b border-white/10 shrink-0">
-          <Logo variant="header" onDarkBackground={true} withLink={false} />
+        {/* Top bar with close button */}
+        <div className="flex items-center justify-between px-6 lg:px-12 h-24 border-b border-white/10 shrink-0 bg-[#0A0A0A]">
+          <Logo variant="header" onDarkBackground={true} isHome={false} />
           <button
             type="button"
             onClick={() => setMobileOpen(false)}
             aria-label="Close menu"
-            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+            className="text-white/70 hover:text-white transition-colors p-2"
           >
-            <X className="h-6 w-6" />
+            <X className="h-7 w-7 stroke-[1.5px]" />
           </button>
         </div>
 
-        {/* Nav links */}
-        <nav className="flex flex-col px-6 pt-10 gap-0 flex-1 overflow-y-auto" aria-label="Mobile">
-          {megaNav.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <div key={item.label}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`flex items-center py-5 text-2xl font-serif border-b border-white/10 transition-colors ${
-                    active ? "text-[#C9A96E]" : "text-white hover:text-[#C9A96E]"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-                {item.items.length > 0 && (
-                  <div className="pl-4 pb-2 space-y-2">
-                    {item.items.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="block py-2 text-sm text-white/50 hover:text-[#C9A96E] transition-colors"
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </nav>
+        {/* Scrollable menu content */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-10 lg:py-16 flex flex-col gap-12 w-full min-h-full justify-between">
+            
+            {/* Links Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+              {megaNav.map((item) => (
+                <div key={item.label} className="flex flex-col">
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-2xl md:text-3xl font-serif text-white tracking-wide mb-4 hover:text-[#C9A96E] transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                  <div className="h-[1px] bg-white/10 w-full mb-6"></div>
+                  {item.items.length > 0 && (
+                    <div className="flex flex-col gap-5 pl-2">
+                      {item.items.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="text-[15px] text-white/60 hover:text-white transition-colors"
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
 
-        {/* Bottom CTA */}
-        <div className="px-6 pb-10 pt-6 shrink-0">
-          <Link
-            href="/contact"
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center justify-center w-full border border-[#C9A96E] text-[#C9A96E] py-5 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
-          >
-            GET FREE QUOTE
-          </Link>
-          <p className="text-center text-white/30 text-xs mt-4">
-            <a href={`tel:${site.phoneRaw}`} className="hover:text-[#C9A96E] transition-colors">
-              {site.phone}
-            </a>
-          </p>
+            {/* Bottom CTA & Phone */}
+            <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 pb-6 pt-8 border-t border-white/10 shrink-0">
+              <p className="text-center md:text-left text-white/50 text-[14px]">
+                {site.phone}
+              </p>
+              <Link
+                href="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="w-full md:w-auto px-10 py-4 border border-[#C9A96E] text-[#C9A96E] text-center text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-colors"
+              >
+                GET FREE QUOTE
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </header>
   );
 }
+
